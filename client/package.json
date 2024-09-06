@@ -1,0 +1,144 @@
+{
+  "name": "permissions",
+  "description": "",
+  "version": "1.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "config": {
+    "API_HOST": "ws://localhost:9064",
+    "PORT": 6060,
+    "ENABLE_SSO": false
+  },
+  "genx": {
+    "app": {
+      "rootElement": "permissions-root"
+    },
+    "federation": {
+      "remotes": [
+        "@genesislcap/foundation-zero",
+        "@genesislcap/rapid-design-system"
+      ]
+    }
+  },
+  "scripts": {
+    "baseline": "npm run clean && npm run bootstrap",
+    "bootstrap": "npm install --no-fund --no-audit",
+    "bootstrap:ci": "npm ci --no-fund --no-audit",
+    "build": "genx build -e ENABLE_SSO",
+    "build:stats": "genx analyze",
+    "clean": "genx clean dist node_modules",
+    "dev": "npm run dev:webpack",
+    "dev:docker": "npm run dev -- --host 0.0.0.0",
+    "dev:intellij": "genx dev -e ENABLE_SSO -b webpack",
+    "dev:no-open": "npm run dev -- --no-open",
+    "dev:https": "npm run dev -- --https",
+    "dev:vite": "genx dev -e API_HOST,ENABLE_SSO -b vite",
+    "dev:webpack": "genx dev -e API_HOST,ENABLE_SSO -b webpack",
+    "dsconfig": "dsconfig --path src/styles/design-tokens.json",
+    "git:setup": "cd .. && npx --yes husky install",
+    "lint": "genx lint --profile",
+    "lint:fix": "genx lint --fix",
+    "lint:eslint": "genx lint -l eslint --profile",
+    "lint:stylelint": "genx lint -l stylelint",
+    "serve": "genx serve",
+    "test": "genx test",
+    "test:e2e": "genx test --e2e",
+    "test:e2e:debug": "genx test --e2e --debug",
+    "test:e2e:ui": "genx test --e2e --interactive",
+    "test:coverage": "genx test --coverage",
+    "test:unit:watch": "genx test --watch"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,js}": [
+      "eslint"
+    ],
+    "*.styles.ts": [
+      "stylelint"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "@genesislcap/eslint-config",
+    "ignorePatterns": [
+      "**/dist/**",
+      "**/public/**",
+      "**/coverage/**",
+      "**/test/**",
+      "playwright.config.ts"
+    ]
+  },
+  "stylelint": {
+    "extends": "@genesislcap/stylelint-config"
+  },
+  "prettier": "@genesislcap/prettier-config",
+  "devDependencies": {
+    "@genesiscommunitysuccess/cep-fast-plugin": "5.0.3",
+    "@genesiscommunitysuccess/custom-elements-lsp": "5.0.3",
+    "@genesislcap/design-system-configurator": "14.343.0",
+    "@genesislcap/eslint-config": "14.343.0",
+    "@genesislcap/eslint-stylelint-builder": "14.343.0",
+    "@genesislcap/foundation-testing": "14.343.0",
+    "@genesislcap/genx": "14.343.0",
+    "@genesislcap/prettier-config": "14.343.0",
+    "@genesislcap/stylelint-config": "14.343.0",
+    "@genesislcap/uvu-playwright-builder": "14.343.0",
+    "@genesislcap/vite-builder": "14.343.0",
+    "@genesislcap/webpack-builder": "14.343.0",
+    "@types/node": "20.11.5",
+    "husky": "7.0.4",
+    "typescript": "5.9.2",
+    "lint-prepush": "2.2.1",
+    "lint-staged": "12.4.1"
+  },
+  "dependencies": {
+    "@genesislcap/foundation-comms": "14.343.0",
+    "@genesislcap/foundation-entity-management": "14.343.0",
+    "@genesislcap/foundation-events": "14.343.0",
+    "@genesislcap/foundation-forms": "14.343.0",
+    "@genesislcap/foundation-header": "14.343.0",
+    "@genesislcap/foundation-layout": "14.343.0",
+    "@genesislcap/foundation-logger": "14.343.0",
+    "@genesislcap/foundation-login": "14.343.0",
+    "@genesislcap/foundation-notifications": "14.343.0",
+    "@genesislcap/foundation-shell": "14.343.0",
+    "@genesislcap/foundation-store": "14.343.0",
+    "@genesislcap/foundation-ui": "14.343.0",
+    "@genesislcap/foundation-user": "14.343.0",
+    "@genesislcap/foundation-utils": "14.343.0",
+    "@genesislcap/foundation-zero": "14.343.0",
+    "@genesislcap/g2plot-chart": "14.343.0",
+    "@genesislcap/pbc-auth-ui": "1.0.7",
+    "@genesislcap/rapid-design-system": "14.343.0",
+    "@genesislcap/rapid-grid-pro": "14.343.0",
+    "@genesislcap/web-core": "14.343.0",
+    "numeral": "2.0.6",
+    "rxjs": "7.5.4",
+    "tslib": "2.3.1"
+  },
+  "overrides": {
+    "@genesislcap/foundation-comms": "14.343.0",
+    "@genesislcap/foundation-entity-management": "14.343.0",
+    "@genesislcap/foundation-events": "14.343.0",
+    "@genesislcap/foundation-forms": "14.343.0",
+    "@genesislcap/foundation-header": "14.343.0",
+    "@genesislcap/foundation-layout": "14.343.0",
+    "@genesislcap/foundation-logger": "14.343.0",
+    "@genesislcap/foundation-login": "14.343.0",
+    "@genesislcap/foundation-notifications": "14.343.0",
+    "@genesislcap/foundation-shell": "14.343.0",
+    "@genesislcap/foundation-store": "14.343.0",
+    "@genesislcap/foundation-ui": "14.343.0",
+    "@genesislcap/foundation-user": "14.343.0",
+    "@genesislcap/foundation-utils": "14.343.0",
+    "@genesislcap/foundation-zero": "14.343.0",
+    "@genesislcap/g2plot-chart": "14.343.0",
+    "@genesislcap/rapid-design-system": "14.343.0",
+    "@genesislcap/rapid-grid-pro": "14.343.0",
+    "@genesislcap/web-core": "14.343.0",
+    "typescript": "5.9.2"
+  }
+}
