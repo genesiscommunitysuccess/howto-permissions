@@ -1,0 +1,46 @@
+<!--
+!
+!   System              : DTA Business Library
+!   Sub-System          : AUTH Configuration
+!   Version             : 1.0
+!   Copyright           : (c) DTA
+!
+!   Function : Provide Process Defintions Config for AUTH.
+!
+!   Modification History
+!
+-->
+<processes>
+    <process name="GENESIS_AUTH_MANAGER">
+        <groupId>AUTH</groupId>
+        <start>true</start>
+        <options>-Xmx1024m -DXSD_VALIDATE=false</options>
+        <module>auth-manager</module>
+        <package>global.genesis.eventhandler.pal,global.genesis.auth.manager,global.genesis.dataserver.pal,global.genesis.requestreply.pal</package>
+        <description>Management of user authorisation data and user authentication</description>
+        <script>auth-preferences.kts,auth-user-eventhandler.kts,auth-profile-eventhandler.kts,auth-mfa-eventhandler.kts,auth-password-eventhandler.kts,auth-key-value-eventhandler.kts,auth-login-eventhandler.kts,auth-dataserver.kts,auth-reqrep.kts</script>
+        <classpath>auth-messages*,auth-script-config*</classpath>
+        <language>pal</language>
+    </process>
+
+    <process name="GENESIS_AUTH_PERMS">
+        <groupId>AUTH</groupId>
+        <start>true</start>
+        <scheduleRestart>true</scheduleRestart>
+        <options>-Xmx256m -DXSD_VALIDATE=false</options>
+        <module>auth-perms</module>
+        <package>global.genesis.auth.perms,global.genesis.auth.script.perms,global.genesis.auth.permissions.pal</package>
+        <description>Manages entity level user authorisation</description>
+    </process>
+
+    <process name="GENESIS_AUTH_CONSOLIDATOR">
+        <groupId>AUTH</groupId>
+        <start>true</start>
+        <options>-Xmx256m -DXSD_VALIDATE=false</options>
+        <module>genesis-consolidator2</module>
+        <package>global.genesis.consolidator2</package>
+        <config>auth-consolidator.xml</config>
+        <description>Aggregates data related to authorisation and authentication</description>
+        <primaryOnly>true</primaryOnly>
+    </process>
+</processes>
