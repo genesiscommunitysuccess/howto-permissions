@@ -1,0 +1,7 @@
+.side-nav__brand {
+    background: url('genesis-logo.svg') no-repeat left center !important;
+}
+
+.side-nav__brand-text {
+    visibility: hidden;
+}

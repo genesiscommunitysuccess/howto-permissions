@@ -1,0 +1,25 @@
+query("ALL_TRADES_4", TRADE) {
+    permissioning {
+      // AUTH-COMMENT
+      // The below will force people to have this RIGHT_CODE to access this data server query
+      // N.B. this can be a list of RIGHT_CODE's
+      permissionCodes = listOf("TradeViewRestricted")
+      // AUTH-COMMENT
+      // The below will force a mapping to the COUNTRY_VISIBILITY that is defined for authorisation purposes in the
+      // file scripts\<appname>-permissions.kts (same directory as this file)
+      // in this app it is called permissions-permissions.kts
+      auth(mapName = "COUNTRY_VISIBILITY") {
+        authKeyWithUserName {
+          key(data.countryName, userName)
+        }
+      }
+      auth{
+        // AUTH-COMMENT
+        // The below will check RIGHT_CODE's to hide columns at run time, enabling column specific authorisation
+        hideFields { userName, rowData ->
+          if (!userHasRight(userName, "TradeViewFull")) listOf(CUSTOMER_NAME)
+          else emptyList()
+        }
+      }
+    }
+  }
