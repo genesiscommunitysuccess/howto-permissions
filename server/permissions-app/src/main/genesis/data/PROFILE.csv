@@ -1,0 +1,4 @@
+NAME,DESCRIPTION,STATUS
+Full_Access,Full access profile,ENABLED
+Restricted_Access,Restricted access profile,ENABLED
+Booking_Access,Ability to book,ENABLED
