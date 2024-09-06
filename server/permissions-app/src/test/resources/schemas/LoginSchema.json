@@ -1,0 +1,200 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "SESSION_AUTH_TOKEN": {
+      "type": "string"
+    },
+    "REFRESH_AUTH_TOKEN": {
+      "type": "string"
+    },
+    "SESSION_ID": {
+      "type": "string"
+    },
+    "USER_NAME": {
+      "type": "string"
+    },
+    "DETAILS": {
+      "type": "object",
+      "properties": {
+        "HEARTBEAT_INTERVAL_SECONDS": {
+          "type": "integer"
+        },
+        "SESSION_TIMEOUT_MINS": {
+          "type": "integer"
+        },
+        "REFRESH_TOKEN_EXPIRATION_MINS": {
+          "type": "integer"
+        },
+        "FAILED_LOGIN_ATTEMPTS": {
+          "type": "integer"
+        },
+        "REJECTED_LOGIN_ATTEMPTS": {
+          "type": "integer"
+        },
+        "LAST_LOGIN_DATE_TIME": {
+          "type": "integer"
+        },
+        "DAYS_TO_PASSWORD_EXPIRY": {
+          "type": "integer"
+        },
+        "NOTIFY_EXPIRY": {
+          "type": "null"
+        },
+        "MFA_CODE": {
+          "type": "null"
+        },
+        "MFA_CODE_EXPIRY_MINS": {
+          "type": "null"
+        },
+        "SYSTEM": {
+          "type": "object",
+          "properties": {
+            "DATE": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "DATE"
+          ]
+        },
+        "PRODUCT": {
+          "type": "array",
+          "items": [
+            {
+              "type": "object",
+              "properties": {
+                "NAME": {
+                  "type": "string"
+                },
+                "VERSION": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "NAME",
+                "VERSION"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "NAME": {
+                  "type": "string"
+                },
+                "VERSION": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "NAME",
+                "VERSION"
+              ]
+            }
+          ]
+        }
+      },
+      "required": [
+        "HEARTBEAT_INTERVAL_SECONDS",
+        "SESSION_TIMEOUT_MINS",
+        "REFRESH_TOKEN_EXPIRATION_MINS",
+        "FAILED_LOGIN_ATTEMPTS",
+        "REJECTED_LOGIN_ATTEMPTS",
+        "LAST_LOGIN_DATE_TIME",
+        "DAYS_TO_PASSWORD_EXPIRY",
+        "NOTIFY_EXPIRY",
+        "MFA_CODE",
+        "MFA_CODE_EXPIRY_MINS",
+        "SYSTEM",
+        "PRODUCT"
+      ]
+    },
+    "PERMISSION": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "PROFILE": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "UPDATE_QUEUE_DETAILS": {
+      "type": "object",
+      "properties": {
+        "UPDATE_QUEUE": {
+          "type": "string"
+        },
+        "ZERO_MQ_PROXY_MODE_ENABLED": {
+          "type": "boolean"
+        },
+        "ZERO_MQ_PROXY_INBOUND_PORT": {
+          "type": "integer"
+        },
+        "ZERO_MQ_PROXY_OUTBOUND_PORT": {
+          "type": "integer"
+        },
+        "AERON_SERVICE_PORT": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "UPDATE_QUEUE",
+        "ZERO_MQ_PROXY_MODE_ENABLED",
+        "ZERO_MQ_PROXY_INBOUND_PORT",
+        "ZERO_MQ_PROXY_OUTBOUND_PORT",
+        "AERON_SERVICE_PORT"
+      ]
+    },
+    "USER": {
+      "type": "null"
+    },
+    "MESSAGE_TYPE": {
+      "type": "string"
+    },
+    "SOURCE_REF": {
+      "type": "string"
+    },
+    "METADATA": {
+      "type": "object",
+      "properties": {
+        "IS_EMPTY": {
+          "type": "boolean"
+        },
+        "ALL": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "IS_EMPTY",
+        "ALL"
+      ]
+    }
+  },
+  "required": [
+    "SESSION_AUTH_TOKEN",
+    "REFRESH_AUTH_TOKEN",
+    "SESSION_ID",
+    "USER_NAME",
+    "DETAILS",
+    "PERMISSION",
+    "PROFILE",
+    "UPDATE_QUEUE_DETAILS",
+    "USER",
+    "MESSAGE_TYPE",
+    "SOURCE_REF",
+    "METADATA"
+  ]
+}
