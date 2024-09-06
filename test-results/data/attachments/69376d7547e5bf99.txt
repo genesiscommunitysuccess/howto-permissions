@@ -1,0 +1,22 @@
+eventHandler<Trade>("TRADE_DELETE", transactional = true) {
+    // AUTH-COMMENT
+    // A user must have the RIGHT CODE "TradeUpdate" to call this event
+    // Without this call will be rejected
+    permissioning {
+      permissionCodes = listOf("TradeUpdate")
+      // AUTH-COMMENT
+      // A user must have authorisation for the country they are deleting a transaction against
+      // This is applying row level insert authorisation
+      auth(mapName = "COUNTRY_VISIBILITY") {
+        authKeyWithUserName {
+          val existingTrade= syncDb.get(Trade.byId(data.tradeId))
+          key(existingTrade?.countryName, userName)
+        }
+      }
+    }
+    onCommit { event ->
+      val details = event.details
+      entityDb.delete(details)
+      ack()
+    }
+  }
