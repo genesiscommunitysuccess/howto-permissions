@@ -1,0 +1,8 @@
+PROFILE_NAME,RIGHT_CODE
+Full_Access,TradeUpdate
+Full_Access,TradeViewFull
+Full_Access,TradeViewRestricted
+Booking_Access,TradeUpdate
+Booking_Access,TradeViewRestricted
+Restricted_Access,TradeViewRestricted
+USER_ADMIN,StaticUpdate

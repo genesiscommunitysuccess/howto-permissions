@@ -1,0 +1,573 @@
+{
+  "setApiHost": true,
+  "apiHost": "ws://localhost:9064",
+  "enableSSO": false,
+  "description": "Example app for authorisation",
+  "groupId": "global.genesis",
+  "applicationVersion": "1.0.0-SNAPSHOT",
+  "enableDeployPlugin": false,
+  "csv": [
+    {
+      "name": "ENTITY",
+      "fields": [
+        "ENTITY_NAME"
+      ]
+    },
+    {
+      "name": "USER_ENTITY_ACCESS",
+      "fields": [
+        "ENTITY_NAME",
+        "USER"
+      ]
+    },
+    {
+      "name": "TRADE",
+      "fields": [
+        "VERSION",
+        "ENTITY_NAME",
+        "SIDE",
+        "RATE",
+        "NOTIONAL",
+        "SETTLEMENT_DATE",
+        "SOURCE_CURRENCY",
+        "TARGET_CURRENCY",
+        "CUSTOMER_ID",
+        "CUSTOMER_NAME"
+      ]
+    },
+    {
+      "name": "RIGHT",
+      "fields": [
+        "CODE",
+        "DESCRIPTION"
+      ],
+      "data": [
+        [
+          "TradeViewRestricted",
+          "Trade view restricted"
+        ],
+        [
+          "TradeUpdate",
+          "Trade update"
+        ]
+      ]
+    },
+    {
+      "name": "PROFILE",
+      "fields": [
+        "NAME",
+        "DESCRIPTION",
+        "STATUS"
+      ],
+      "data": [
+        [
+          "permissions_ADMIN",
+          "permissions admin",
+          "ENABLED"
+        ]
+      ]
+    },
+    {
+      "name": "PROFILE_RIGHT",
+      "fields": [
+        "PROFILE_NAME",
+        "RIGHT_CODE"
+      ],
+      "data": [
+        [
+          "permissions_ADMIN",
+          "TradeViewRestricted"
+        ],
+        [
+          "permissions_ADMIN",
+          "TradeUpdate"
+        ]
+      ]
+    },
+    {
+      "name": "PROFILE_USER",
+      "data": [
+        [
+          "permissions_ADMIN",
+          "admin"
+        ]
+      ],
+      "mode": "append"
+    }
+  ],
+  "framework": "webcomponents",
+  "ui": {},
+  "routes": [
+    {
+      "id": "c379d9b7-ff51-419e-9129-edf817fbc59e",
+      "name": "Trades",
+      "layoutType": "grid-layout",
+      "permissions": null,
+      "tiles": [
+        {
+          "title": "Table Level",
+          "type": "entity-manager",
+          "config": {
+            "resourceName": "ALL_TRADES",
+            "permissions": {
+              "updateRight": "TradeUpdate",
+              "viewRight": "TradeViewRestricted"
+            },
+            "updateEvent": "EVENT_TRADE_MODIFY",
+            "deleteEvent": "EVENT_TRADE_DELETE",
+            "createEvent": "EVENT_TRADE_INSERT",
+            "modalPosition": "centre",
+            "sizeColumnsToFit": true,
+            "enableSearchBar": false,
+            "reqrep": false,
+            "columns": "[\n  {\n    field: \"TRADE_ID\",\n  },\n  {\n    field: \"VERSION\",\n    valueFormatter: getNumberFormatter(\"0,0\", null),\n  },\n  {\n    field: \"ENTITY_NAME\",\n  },\n  {\n    field: \"SIDE\",\n  },\n  {\n    field: \"RATE\",\n    valueFormatter: getNumberFormatter(\"0,0.00000\", null),\n  },\n  {\n    field: \"NOTIONAL\",\n    valueFormatter: getNumberFormatter(\"0,0.00\", null),\n  },\n  {\n    field: \"SETTLEMENT_DATE\",\n    valueFormatter: getDateFormatter(\"en-GB\", {\"year\":\"numeric\",\"month\":\"short\",\"day\":\"2-digit\",\"timeZone\":\"UTC\"}),\n  },\n  {\n    field: \"SOURCE_CURRENCY\",\n  },\n  {\n    field: \"TARGET_CURRENCY\",\n  },\n  {\n    field: \"CUSTOMER_ID\",\n    valueFormatter: getNumberFormatter(\"0,0\", null),\n  },\n  {\n    field: \"CUSTOMER_NAME\",\n  }\n]",
+            "createFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Trade Id\",\n      \"scope\": \"#/properties/TRADE_ID\",\n      \"options\": {\n        \"hidden\": true\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Version\",\n      \"scope\": \"#/properties/VERSION\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Side\",\n      \"scope\": \"#/properties/SIDE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Rate\",\n      \"scope\": \"#/properties/RATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Notional\",\n      \"scope\": \"#/properties/NOTIONAL\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Settlement Date\",\n      \"scope\": \"#/properties/SETTLEMENT_DATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Source Currency\",\n      \"scope\": \"#/properties/SOURCE_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Target Currency\",\n      \"scope\": \"#/properties/TARGET_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Id\",\n      \"scope\": \"#/properties/CUSTOMER_ID\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Name\",\n      \"scope\": \"#/properties/CUSTOMER_NAME\",\n      \"options\": {}\n    }\n  ]\n}",
+            "updateFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Trade Id\",\n      \"scope\": \"#/properties/TRADE_ID\",\n      \"options\": {\n        \"readonly\": true\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Version\",\n      \"scope\": \"#/properties/VERSION\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Side\",\n      \"scope\": \"#/properties/SIDE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Rate\",\n      \"scope\": \"#/properties/RATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Notional\",\n      \"scope\": \"#/properties/NOTIONAL\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Settlement Date\",\n      \"scope\": \"#/properties/SETTLEMENT_DATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Source Currency\",\n      \"scope\": \"#/properties/SOURCE_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Target Currency\",\n      \"scope\": \"#/properties/TARGET_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Id\",\n      \"scope\": \"#/properties/CUSTOMER_ID\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Name\",\n      \"scope\": \"#/properties/CUSTOMER_NAME\",\n      \"options\": {}\n    }\n  ]\n}",
+            "index": 0
+          },
+          "componentName": "Trades-TableLevel-manager",
+          "componentType": "manager"
+        },
+        {
+          "title": "Row Level",
+          "type": "entity-manager",
+          "config": {
+            "resourceName": "ALL_TRADES",
+            "permissions": {
+              "updateRight": "TradeUpdate",
+              "viewRight": "TradeViewRestricted"
+            },
+            "updateEvent": "EVENT_TRADE_MODIFY",
+            "deleteEvent": "EVENT_TRADE_DELETE",
+            "createEvent": "EVENT_TRADE_INSERT",
+            "modalPosition": "centre",
+            "sizeColumnsToFit": true,
+            "enableSearchBar": false,
+            "reqrep": false,
+            "columns": "[\n  {\n    field: \"TRADE_ID\",\n  },\n  {\n    field: \"VERSION\",\n    valueFormatter: getNumberFormatter(\"0,0\", null),\n  },\n  {\n    field: \"ENTITY_NAME\",\n  },\n  {\n    field: \"SIDE\",\n  },\n  {\n    field: \"RATE\",\n    valueFormatter: getNumberFormatter(\"0,0.00000\", null),\n  },\n  {\n    field: \"NOTIONAL\",\n    valueFormatter: getNumberFormatter(\"0,0.00\", null),\n  },\n  {\n    field: \"SETTLEMENT_DATE\",\n    valueFormatter: getDateFormatter(\"en-GB\", {\"year\":\"numeric\",\"month\":\"short\",\"day\":\"2-digit\",\"timeZone\":\"UTC\"}),\n  },\n  {\n    field: \"SOURCE_CURRENCY\",\n  },\n  {\n    field: \"TARGET_CURRENCY\",\n  },\n  {\n    field: \"CUSTOMER_ID\",\n    valueFormatter: getNumberFormatter(\"0,0\", null),\n  },\n  {\n    field: \"CUSTOMER_NAME\",\n  }\n]",
+            "createFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Trade Id\",\n      \"scope\": \"#/properties/TRADE_ID\",\n      \"options\": {\n        \"hidden\": true\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Version\",\n      \"scope\": \"#/properties/VERSION\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Side\",\n      \"scope\": \"#/properties/SIDE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Rate\",\n      \"scope\": \"#/properties/RATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Notional\",\n      \"scope\": \"#/properties/NOTIONAL\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Settlement Date\",\n      \"scope\": \"#/properties/SETTLEMENT_DATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Source Currency\",\n      \"scope\": \"#/properties/SOURCE_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Target Currency\",\n      \"scope\": \"#/properties/TARGET_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Id\",\n      \"scope\": \"#/properties/CUSTOMER_ID\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Name\",\n      \"scope\": \"#/properties/CUSTOMER_NAME\",\n      \"options\": {}\n    }\n  ]\n}",
+            "updateFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Trade Id\",\n      \"scope\": \"#/properties/TRADE_ID\",\n      \"options\": {\n        \"readonly\": true\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Version\",\n      \"scope\": \"#/properties/VERSION\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Side\",\n      \"scope\": \"#/properties/SIDE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Rate\",\n      \"scope\": \"#/properties/RATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Notional\",\n      \"scope\": \"#/properties/NOTIONAL\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Settlement Date\",\n      \"scope\": \"#/properties/SETTLEMENT_DATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Source Currency\",\n      \"scope\": \"#/properties/SOURCE_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Target Currency\",\n      \"scope\": \"#/properties/TARGET_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Id\",\n      \"scope\": \"#/properties/CUSTOMER_ID\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Name\",\n      \"scope\": \"#/properties/CUSTOMER_NAME\",\n      \"options\": {}\n    }\n  ]\n}",
+            "index": 1
+          },
+          "componentName": "Trades-RowLevel-manager",
+          "componentType": "manager"
+        },
+        {
+          "title": "Column Level",
+          "type": "entity-manager",
+          "config": {
+            "resourceName": "ALL_TRADES",
+            "permissions": {
+              "updateRight": "TradeUpdate",
+              "viewRight": "TradeViewRestricted"
+            },
+            "updateEvent": "EVENT_TRADE_MODIFY",
+            "deleteEvent": "EVENT_TRADE_DELETE",
+            "createEvent": "EVENT_TRADE_INSERT",
+            "modalPosition": "centre",
+            "sizeColumnsToFit": true,
+            "enableSearchBar": false,
+            "reqrep": false,
+            "columns": "[\n  {\n    field: \"TRADE_ID\",\n  },\n  {\n    field: \"VERSION\",\n    valueFormatter: getNumberFormatter(\"0,0\", null),\n  },\n  {\n    field: \"ENTITY_NAME\",\n  },\n  {\n    field: \"SIDE\",\n  },\n  {\n    field: \"RATE\",\n    valueFormatter: getNumberFormatter(\"0,0.00000\", null),\n  },\n  {\n    field: \"NOTIONAL\",\n    valueFormatter: getNumberFormatter(\"0,0.00\", null),\n  },\n  {\n    field: \"SETTLEMENT_DATE\",\n    valueFormatter: getDateFormatter(\"en-GB\", {\"year\":\"numeric\",\"month\":\"short\",\"day\":\"2-digit\",\"timeZone\":\"UTC\"}),\n  },\n  {\n    field: \"SOURCE_CURRENCY\",\n  },\n  {\n    field: \"TARGET_CURRENCY\",\n  },\n  {\n    field: \"CUSTOMER_ID\",\n    valueFormatter: getNumberFormatter(\"0,0\", null),\n  },\n  {\n    field: \"CUSTOMER_NAME\",\n  }\n]",
+            "createFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Trade Id\",\n      \"scope\": \"#/properties/TRADE_ID\",\n      \"options\": {\n        \"hidden\": true\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Version\",\n      \"scope\": \"#/properties/VERSION\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Side\",\n      \"scope\": \"#/properties/SIDE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Rate\",\n      \"scope\": \"#/properties/RATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Notional\",\n      \"scope\": \"#/properties/NOTIONAL\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Settlement Date\",\n      \"scope\": \"#/properties/SETTLEMENT_DATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Source Currency\",\n      \"scope\": \"#/properties/SOURCE_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Target Currency\",\n      \"scope\": \"#/properties/TARGET_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Id\",\n      \"scope\": \"#/properties/CUSTOMER_ID\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Name\",\n      \"scope\": \"#/properties/CUSTOMER_NAME\",\n      \"options\": {}\n    }\n  ]\n}",
+            "updateFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Trade Id\",\n      \"scope\": \"#/properties/TRADE_ID\",\n      \"options\": {\n        \"readonly\": true\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Version\",\n      \"scope\": \"#/properties/VERSION\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Side\",\n      \"scope\": \"#/properties/SIDE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Rate\",\n      \"scope\": \"#/properties/RATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Notional\",\n      \"scope\": \"#/properties/NOTIONAL\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Settlement Date\",\n      \"scope\": \"#/properties/SETTLEMENT_DATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Source Currency\",\n      \"scope\": \"#/properties/SOURCE_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Target Currency\",\n      \"scope\": \"#/properties/TARGET_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Id\",\n      \"scope\": \"#/properties/CUSTOMER_ID\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Name\",\n      \"scope\": \"#/properties/CUSTOMER_NAME\",\n      \"options\": {}\n    }\n  ]\n}",
+            "index": 2
+          },
+          "componentName": "Trades-ColumnLevel-manager",
+          "componentType": "manager"
+        },
+        {
+          "title": "Row and Column Level",
+          "type": "entity-manager",
+          "config": {
+            "resourceName": "ALL_TRADES",
+            "permissions": {
+              "updateRight": "TradeUpdate",
+              "viewRight": "TradeViewRestricted"
+            },
+            "updateEvent": "EVENT_TRADE_MODIFY",
+            "deleteEvent": "EVENT_TRADE_DELETE",
+            "createEvent": "EVENT_TRADE_INSERT",
+            "modalPosition": "centre",
+            "sizeColumnsToFit": true,
+            "enableSearchBar": false,
+            "reqrep": false,
+            "columns": "[\n  {\n    field: \"TRADE_ID\",\n  },\n  {\n    field: \"VERSION\",\n    valueFormatter: getNumberFormatter(\"0,0\", null),\n  },\n  {\n    field: \"ENTITY_NAME\",\n  },\n  {\n    field: \"SIDE\",\n  },\n  {\n    field: \"RATE\",\n    valueFormatter: getNumberFormatter(\"0,0.00000\", null),\n  },\n  {\n    field: \"NOTIONAL\",\n    valueFormatter: getNumberFormatter(\"0,0.00\", null),\n  },\n  {\n    field: \"SETTLEMENT_DATE\",\n    valueFormatter: getDateFormatter(\"en-GB\", {\"year\":\"numeric\",\"month\":\"short\",\"day\":\"2-digit\",\"timeZone\":\"UTC\"}),\n  },\n  {\n    field: \"SOURCE_CURRENCY\",\n  },\n  {\n    field: \"TARGET_CURRENCY\",\n  },\n  {\n    field: \"CUSTOMER_ID\",\n    valueFormatter: getNumberFormatter(\"0,0\", null),\n  },\n  {\n    field: \"CUSTOMER_NAME\",\n  }\n]",
+            "createFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Trade Id\",\n      \"scope\": \"#/properties/TRADE_ID\",\n      \"options\": {\n        \"hidden\": true\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Version\",\n      \"scope\": \"#/properties/VERSION\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Side\",\n      \"scope\": \"#/properties/SIDE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Rate\",\n      \"scope\": \"#/properties/RATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Notional\",\n      \"scope\": \"#/properties/NOTIONAL\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Settlement Date\",\n      \"scope\": \"#/properties/SETTLEMENT_DATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Source Currency\",\n      \"scope\": \"#/properties/SOURCE_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Target Currency\",\n      \"scope\": \"#/properties/TARGET_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Id\",\n      \"scope\": \"#/properties/CUSTOMER_ID\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Name\",\n      \"scope\": \"#/properties/CUSTOMER_NAME\",\n      \"options\": {}\n    }\n  ]\n}",
+            "updateFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Trade Id\",\n      \"scope\": \"#/properties/TRADE_ID\",\n      \"options\": {\n        \"readonly\": true\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Version\",\n      \"scope\": \"#/properties/VERSION\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Side\",\n      \"scope\": \"#/properties/SIDE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Rate\",\n      \"scope\": \"#/properties/RATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Notional\",\n      \"scope\": \"#/properties/NOTIONAL\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Settlement Date\",\n      \"scope\": \"#/properties/SETTLEMENT_DATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Source Currency\",\n      \"scope\": \"#/properties/SOURCE_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Target Currency\",\n      \"scope\": \"#/properties/TARGET_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Id\",\n      \"scope\": \"#/properties/CUSTOMER_ID\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Name\",\n      \"scope\": \"#/properties/CUSTOMER_NAME\",\n      \"options\": {}\n    }\n  ]\n}",
+            "index": 3
+          },
+          "componentName": "Trades-RowandColumnLevel-manager",
+          "componentType": "manager"
+        }
+      ],
+      "layoutKey": "Trades_1721917637691",
+      "FDC3EventHandlersEnabled": false
+    },
+    {
+      "id": "c1956de3-aa26-4c4e-81aa-6979d6b0c922",
+      "name": "Static",
+      "layoutType": "horizontal-layout",
+      "permissions": null,
+      "tiles": [
+        {
+          "title": "Entities",
+          "type": "entity-manager",
+          "config": {
+            "resourceName": "ALL_ENTITYS",
+            "permissions": null,
+            "updateEvent": "EVENT_ENTITY_MODIFY",
+            "deleteEvent": "EVENT_ENTITY_DELETE",
+            "createEvent": "EVENT_ENTITY_INSERT",
+            "modalPosition": "centre",
+            "sizeColumnsToFit": true,
+            "enableSearchBar": false,
+            "reqrep": false,
+            "columns": "[\n  {\n    field: \"ENTITY_NAME\",\n  }\n]",
+            "createFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    }\n  ]\n}",
+            "updateFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    }\n  ]\n}",
+            "index": 0
+          },
+          "componentName": "Static-Entities-manager",
+          "componentType": "manager"
+        },
+        {
+          "title": "User Entities",
+          "type": "entity-manager",
+          "config": {
+            "resourceName": "ALL_USER_ENTITY_ACCESSS",
+            "permissions": null,
+            "updateEvent": "EVENT_USER_ENTITY_ACCESS_MODIFY",
+            "deleteEvent": "EVENT_USER_ENTITY_ACCESS_DELETE",
+            "createEvent": "EVENT_USER_ENTITY_ACCESS_INSERT",
+            "modalPosition": "centre",
+            "sizeColumnsToFit": true,
+            "enableSearchBar": false,
+            "reqrep": false,
+            "columns": "[\n  {\n    field: \"ENTITY_NAME\",\n  },\n  {\n    field: \"USER\",\n  }\n]",
+            "createFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"User\",\n      \"scope\": \"#/properties/USER\",\n      \"options\": {}\n    }\n  ]\n}",
+            "updateFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"User\",\n      \"scope\": \"#/properties/USER\",\n      \"options\": {}\n    }\n  ]\n}",
+            "index": 1
+          },
+          "componentName": "Static-UserEntities-manager",
+          "componentType": "manager"
+        }
+      ],
+      "layoutKey": "Static_1721917637692",
+      "FDC3EventHandlersEnabled": false
+    }
+  ],
+  "appName": "permissions",
+  "pkgName": "permissions",
+  "directory": "permissions",
+  "appSeed": {
+    "type": "local",
+    "name": "blank-app-seed",
+    "description": "Genesis Blank App Seed Configuration",
+    "version": "3.24.0",
+    "date": "2024-07-25T14:27:17.668Z"
+  },
+  "rootElement": "permissions-root",
+  "localGenId": "PERMISSIONS",
+  "applicationVersionWeb": "1.0.0",
+  "versions": {
+    "UI": "14.194.6",
+    "GSF": "8.1.3",
+    "Auth": "8.1.0"
+  },
+  "FDC3": {
+    "includeDependencies": false,
+    "channels": []
+  },
+  "additions": [
+    {
+      "setApiHost": true,
+      "apiHost": "ws://localhost:9064",
+      "enableSSO": false,
+      "description": "Example app for authorisation",
+      "groupId": "global.genesis",
+      "applicationVersion": "1.0.0-SNAPSHOT",
+      "enableDeployPlugin": false,
+      "csv": [
+        {
+          "name": "ENTITY",
+          "fields": [
+            "ENTITY_NAME"
+          ]
+        },
+        {
+          "name": "USER_ENTITY_ACCESS",
+          "fields": [
+            "ENTITY_NAME",
+            "USER"
+          ]
+        },
+        {
+          "name": "TRADE",
+          "fields": [
+            "VERSION",
+            "ENTITY_NAME",
+            "SIDE",
+            "RATE",
+            "NOTIONAL",
+            "SETTLEMENT_DATE",
+            "SOURCE_CURRENCY",
+            "TARGET_CURRENCY",
+            "CUSTOMER_ID",
+            "CUSTOMER_NAME"
+          ]
+        },
+        {
+          "name": "RIGHT",
+          "fields": [
+            "CODE",
+            "DESCRIPTION"
+          ],
+          "data": [
+            [
+              "TradeViewRestricted",
+              "Trade view restricted"
+            ],
+            [
+              "TradeUpdate",
+              "Trade update"
+            ]
+          ]
+        },
+        {
+          "name": "PROFILE",
+          "fields": [
+            "NAME",
+            "DESCRIPTION",
+            "STATUS"
+          ],
+          "data": [
+            [
+              "permissions_ADMIN",
+              "permissions admin",
+              "ENABLED"
+            ]
+          ]
+        },
+        {
+          "name": "PROFILE_RIGHT",
+          "fields": [
+            "PROFILE_NAME",
+            "RIGHT_CODE"
+          ],
+          "data": [
+            [
+              "permissions_ADMIN",
+              "TradeViewRestricted"
+            ],
+            [
+              "permissions_ADMIN",
+              "TradeUpdate"
+            ]
+          ]
+        },
+        {
+          "name": "PROFILE_USER",
+          "data": [
+            [
+              "permissions_ADMIN",
+              "admin"
+            ]
+          ],
+          "mode": "append"
+        }
+      ],
+      "framework": "webcomponents",
+      "ui": {},
+      "routes": [
+        {
+          "id": "c379d9b7-ff51-419e-9129-edf817fbc59e",
+          "name": "Trades",
+          "layoutType": "grid-layout",
+          "permissions": null,
+          "tiles": [
+            {
+              "title": "Table Level",
+              "type": "entity-manager",
+              "config": {
+                "resourceName": "ALL_TRADES",
+                "permissions": {
+                  "updateRight": "TradeUpdate",
+                  "viewRight": "TradeViewRestricted"
+                },
+                "updateEvent": "EVENT_TRADE_MODIFY",
+                "deleteEvent": "EVENT_TRADE_DELETE",
+                "createEvent": "EVENT_TRADE_INSERT",
+                "modalPosition": "centre",
+                "sizeColumnsToFit": true,
+                "enableSearchBar": false,
+                "reqrep": false,
+                "columns": "[\n  {\n    field: \"TRADE_ID\",\n  },\n  {\n    field: \"VERSION\",\n    valueFormatter: getNumberFormatter(\"0,0\", null),\n  },\n  {\n    field: \"ENTITY_NAME\",\n  },\n  {\n    field: \"SIDE\",\n  },\n  {\n    field: \"RATE\",\n    valueFormatter: getNumberFormatter(\"0,0.00000\", null),\n  },\n  {\n    field: \"NOTIONAL\",\n    valueFormatter: getNumberFormatter(\"0,0.00\", null),\n  },\n  {\n    field: \"SETTLEMENT_DATE\",\n    valueFormatter: getDateFormatter(\"en-GB\", {\"year\":\"numeric\",\"month\":\"short\",\"day\":\"2-digit\",\"timeZone\":\"UTC\"}),\n  },\n  {\n    field: \"SOURCE_CURRENCY\",\n  },\n  {\n    field: \"TARGET_CURRENCY\",\n  },\n  {\n    field: \"CUSTOMER_ID\",\n    valueFormatter: getNumberFormatter(\"0,0\", null),\n  },\n  {\n    field: \"CUSTOMER_NAME\",\n  }\n]",
+                "createFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Trade Id\",\n      \"scope\": \"#/properties/TRADE_ID\",\n      \"options\": {\n        \"hidden\": true\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Version\",\n      \"scope\": \"#/properties/VERSION\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Side\",\n      \"scope\": \"#/properties/SIDE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Rate\",\n      \"scope\": \"#/properties/RATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Notional\",\n      \"scope\": \"#/properties/NOTIONAL\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Settlement Date\",\n      \"scope\": \"#/properties/SETTLEMENT_DATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Source Currency\",\n      \"scope\": \"#/properties/SOURCE_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Target Currency\",\n      \"scope\": \"#/properties/TARGET_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Id\",\n      \"scope\": \"#/properties/CUSTOMER_ID\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Name\",\n      \"scope\": \"#/properties/CUSTOMER_NAME\",\n      \"options\": {}\n    }\n  ]\n}",
+                "updateFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Trade Id\",\n      \"scope\": \"#/properties/TRADE_ID\",\n      \"options\": {\n        \"readonly\": true\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Version\",\n      \"scope\": \"#/properties/VERSION\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Side\",\n      \"scope\": \"#/properties/SIDE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Rate\",\n      \"scope\": \"#/properties/RATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Notional\",\n      \"scope\": \"#/properties/NOTIONAL\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Settlement Date\",\n      \"scope\": \"#/properties/SETTLEMENT_DATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Source Currency\",\n      \"scope\": \"#/properties/SOURCE_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Target Currency\",\n      \"scope\": \"#/properties/TARGET_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Id\",\n      \"scope\": \"#/properties/CUSTOMER_ID\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Name\",\n      \"scope\": \"#/properties/CUSTOMER_NAME\",\n      \"options\": {}\n    }\n  ]\n}",
+                "index": 0
+              },
+              "componentName": "Trades-TableLevel-manager",
+              "componentType": "manager"
+            },
+            {
+              "title": "Row Level",
+              "type": "entity-manager",
+              "config": {
+                "resourceName": "ALL_TRADES",
+                "permissions": {
+                  "updateRight": "TradeUpdate",
+                  "viewRight": "TradeViewRestricted"
+                },
+                "updateEvent": "EVENT_TRADE_MODIFY",
+                "deleteEvent": "EVENT_TRADE_DELETE",
+                "createEvent": "EVENT_TRADE_INSERT",
+                "modalPosition": "centre",
+                "sizeColumnsToFit": true,
+                "enableSearchBar": false,
+                "reqrep": false,
+                "columns": "[\n  {\n    field: \"TRADE_ID\",\n  },\n  {\n    field: \"VERSION\",\n    valueFormatter: getNumberFormatter(\"0,0\", null),\n  },\n  {\n    field: \"ENTITY_NAME\",\n  },\n  {\n    field: \"SIDE\",\n  },\n  {\n    field: \"RATE\",\n    valueFormatter: getNumberFormatter(\"0,0.00000\", null),\n  },\n  {\n    field: \"NOTIONAL\",\n    valueFormatter: getNumberFormatter(\"0,0.00\", null),\n  },\n  {\n    field: \"SETTLEMENT_DATE\",\n    valueFormatter: getDateFormatter(\"en-GB\", {\"year\":\"numeric\",\"month\":\"short\",\"day\":\"2-digit\",\"timeZone\":\"UTC\"}),\n  },\n  {\n    field: \"SOURCE_CURRENCY\",\n  },\n  {\n    field: \"TARGET_CURRENCY\",\n  },\n  {\n    field: \"CUSTOMER_ID\",\n    valueFormatter: getNumberFormatter(\"0,0\", null),\n  },\n  {\n    field: \"CUSTOMER_NAME\",\n  }\n]",
+                "createFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Trade Id\",\n      \"scope\": \"#/properties/TRADE_ID\",\n      \"options\": {\n        \"hidden\": true\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Version\",\n      \"scope\": \"#/properties/VERSION\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Side\",\n      \"scope\": \"#/properties/SIDE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Rate\",\n      \"scope\": \"#/properties/RATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Notional\",\n      \"scope\": \"#/properties/NOTIONAL\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Settlement Date\",\n      \"scope\": \"#/properties/SETTLEMENT_DATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Source Currency\",\n      \"scope\": \"#/properties/SOURCE_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Target Currency\",\n      \"scope\": \"#/properties/TARGET_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Id\",\n      \"scope\": \"#/properties/CUSTOMER_ID\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Name\",\n      \"scope\": \"#/properties/CUSTOMER_NAME\",\n      \"options\": {}\n    }\n  ]\n}",
+                "updateFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Trade Id\",\n      \"scope\": \"#/properties/TRADE_ID\",\n      \"options\": {\n        \"readonly\": true\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Version\",\n      \"scope\": \"#/properties/VERSION\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Side\",\n      \"scope\": \"#/properties/SIDE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Rate\",\n      \"scope\": \"#/properties/RATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Notional\",\n      \"scope\": \"#/properties/NOTIONAL\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Settlement Date\",\n      \"scope\": \"#/properties/SETTLEMENT_DATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Source Currency\",\n      \"scope\": \"#/properties/SOURCE_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Target Currency\",\n      \"scope\": \"#/properties/TARGET_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Id\",\n      \"scope\": \"#/properties/CUSTOMER_ID\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Name\",\n      \"scope\": \"#/properties/CUSTOMER_NAME\",\n      \"options\": {}\n    }\n  ]\n}",
+                "index": 1
+              },
+              "componentName": "Trades-RowLevel-manager",
+              "componentType": "manager"
+            },
+            {
+              "title": "Column Level",
+              "type": "entity-manager",
+              "config": {
+                "resourceName": "ALL_TRADES",
+                "permissions": {
+                  "updateRight": "TradeUpdate",
+                  "viewRight": "TradeViewRestricted"
+                },
+                "updateEvent": "EVENT_TRADE_MODIFY",
+                "deleteEvent": "EVENT_TRADE_DELETE",
+                "createEvent": "EVENT_TRADE_INSERT",
+                "modalPosition": "centre",
+                "sizeColumnsToFit": true,
+                "enableSearchBar": false,
+                "reqrep": false,
+                "columns": "[\n  {\n    field: \"TRADE_ID\",\n  },\n  {\n    field: \"VERSION\",\n    valueFormatter: getNumberFormatter(\"0,0\", null),\n  },\n  {\n    field: \"ENTITY_NAME\",\n  },\n  {\n    field: \"SIDE\",\n  },\n  {\n    field: \"RATE\",\n    valueFormatter: getNumberFormatter(\"0,0.00000\", null),\n  },\n  {\n    field: \"NOTIONAL\",\n    valueFormatter: getNumberFormatter(\"0,0.00\", null),\n  },\n  {\n    field: \"SETTLEMENT_DATE\",\n    valueFormatter: getDateFormatter(\"en-GB\", {\"year\":\"numeric\",\"month\":\"short\",\"day\":\"2-digit\",\"timeZone\":\"UTC\"}),\n  },\n  {\n    field: \"SOURCE_CURRENCY\",\n  },\n  {\n    field: \"TARGET_CURRENCY\",\n  },\n  {\n    field: \"CUSTOMER_ID\",\n    valueFormatter: getNumberFormatter(\"0,0\", null),\n  },\n  {\n    field: \"CUSTOMER_NAME\",\n  }\n]",
+                "createFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Trade Id\",\n      \"scope\": \"#/properties/TRADE_ID\",\n      \"options\": {\n        \"hidden\": true\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Version\",\n      \"scope\": \"#/properties/VERSION\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Side\",\n      \"scope\": \"#/properties/SIDE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Rate\",\n      \"scope\": \"#/properties/RATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Notional\",\n      \"scope\": \"#/properties/NOTIONAL\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Settlement Date\",\n      \"scope\": \"#/properties/SETTLEMENT_DATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Source Currency\",\n      \"scope\": \"#/properties/SOURCE_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Target Currency\",\n      \"scope\": \"#/properties/TARGET_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Id\",\n      \"scope\": \"#/properties/CUSTOMER_ID\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Name\",\n      \"scope\": \"#/properties/CUSTOMER_NAME\",\n      \"options\": {}\n    }\n  ]\n}",
+                "updateFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Trade Id\",\n      \"scope\": \"#/properties/TRADE_ID\",\n      \"options\": {\n        \"readonly\": true\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Version\",\n      \"scope\": \"#/properties/VERSION\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Side\",\n      \"scope\": \"#/properties/SIDE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Rate\",\n      \"scope\": \"#/properties/RATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Notional\",\n      \"scope\": \"#/properties/NOTIONAL\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Settlement Date\",\n      \"scope\": \"#/properties/SETTLEMENT_DATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Source Currency\",\n      \"scope\": \"#/properties/SOURCE_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Target Currency\",\n      \"scope\": \"#/properties/TARGET_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Id\",\n      \"scope\": \"#/properties/CUSTOMER_ID\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Name\",\n      \"scope\": \"#/properties/CUSTOMER_NAME\",\n      \"options\": {}\n    }\n  ]\n}",
+                "index": 2
+              },
+              "componentName": "Trades-ColumnLevel-manager",
+              "componentType": "manager"
+            },
+            {
+              "title": "Row and Column Level",
+              "type": "entity-manager",
+              "config": {
+                "resourceName": "ALL_TRADES",
+                "permissions": {
+                  "updateRight": "TradeUpdate",
+                  "viewRight": "TradeViewRestricted"
+                },
+                "updateEvent": "EVENT_TRADE_MODIFY",
+                "deleteEvent": "EVENT_TRADE_DELETE",
+                "createEvent": "EVENT_TRADE_INSERT",
+                "modalPosition": "centre",
+                "sizeColumnsToFit": true,
+                "enableSearchBar": false,
+                "reqrep": false,
+                "columns": "[\n  {\n    field: \"TRADE_ID\",\n  },\n  {\n    field: \"VERSION\",\n    valueFormatter: getNumberFormatter(\"0,0\", null),\n  },\n  {\n    field: \"ENTITY_NAME\",\n  },\n  {\n    field: \"SIDE\",\n  },\n  {\n    field: \"RATE\",\n    valueFormatter: getNumberFormatter(\"0,0.00000\", null),\n  },\n  {\n    field: \"NOTIONAL\",\n    valueFormatter: getNumberFormatter(\"0,0.00\", null),\n  },\n  {\n    field: \"SETTLEMENT_DATE\",\n    valueFormatter: getDateFormatter(\"en-GB\", {\"year\":\"numeric\",\"month\":\"short\",\"day\":\"2-digit\",\"timeZone\":\"UTC\"}),\n  },\n  {\n    field: \"SOURCE_CURRENCY\",\n  },\n  {\n    field: \"TARGET_CURRENCY\",\n  },\n  {\n    field: \"CUSTOMER_ID\",\n    valueFormatter: getNumberFormatter(\"0,0\", null),\n  },\n  {\n    field: \"CUSTOMER_NAME\",\n  }\n]",
+                "createFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Trade Id\",\n      \"scope\": \"#/properties/TRADE_ID\",\n      \"options\": {\n        \"hidden\": true\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Version\",\n      \"scope\": \"#/properties/VERSION\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Side\",\n      \"scope\": \"#/properties/SIDE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Rate\",\n      \"scope\": \"#/properties/RATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Notional\",\n      \"scope\": \"#/properties/NOTIONAL\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Settlement Date\",\n      \"scope\": \"#/properties/SETTLEMENT_DATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Source Currency\",\n      \"scope\": \"#/properties/SOURCE_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Target Currency\",\n      \"scope\": \"#/properties/TARGET_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Id\",\n      \"scope\": \"#/properties/CUSTOMER_ID\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Name\",\n      \"scope\": \"#/properties/CUSTOMER_NAME\",\n      \"options\": {}\n    }\n  ]\n}",
+                "updateFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Trade Id\",\n      \"scope\": \"#/properties/TRADE_ID\",\n      \"options\": {\n        \"readonly\": true\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Version\",\n      \"scope\": \"#/properties/VERSION\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Side\",\n      \"scope\": \"#/properties/SIDE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Rate\",\n      \"scope\": \"#/properties/RATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Notional\",\n      \"scope\": \"#/properties/NOTIONAL\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Settlement Date\",\n      \"scope\": \"#/properties/SETTLEMENT_DATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Source Currency\",\n      \"scope\": \"#/properties/SOURCE_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Target Currency\",\n      \"scope\": \"#/properties/TARGET_CURRENCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Id\",\n      \"scope\": \"#/properties/CUSTOMER_ID\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Customer Name\",\n      \"scope\": \"#/properties/CUSTOMER_NAME\",\n      \"options\": {}\n    }\n  ]\n}",
+                "index": 3
+              },
+              "componentName": "Trades-RowandColumnLevel-manager",
+              "componentType": "manager"
+            }
+          ],
+          "layoutKey": "Trades_1721917637691",
+          "FDC3EventHandlersEnabled": false
+        },
+        {
+          "id": "c1956de3-aa26-4c4e-81aa-6979d6b0c922",
+          "name": "Static",
+          "layoutType": "horizontal-layout",
+          "permissions": null,
+          "tiles": [
+            {
+              "title": "Entities",
+              "type": "entity-manager",
+              "config": {
+                "resourceName": "ALL_ENTITYS",
+                "permissions": null,
+                "updateEvent": "EVENT_ENTITY_MODIFY",
+                "deleteEvent": "EVENT_ENTITY_DELETE",
+                "createEvent": "EVENT_ENTITY_INSERT",
+                "modalPosition": "centre",
+                "sizeColumnsToFit": true,
+                "enableSearchBar": false,
+                "reqrep": false,
+                "columns": "[\n  {\n    field: \"ENTITY_NAME\",\n  }\n]",
+                "createFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    }\n  ]\n}",
+                "updateFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    }\n  ]\n}",
+                "index": 0
+              },
+              "componentName": "Static-Entities-manager",
+              "componentType": "manager"
+            },
+            {
+              "title": "User Entities",
+              "type": "entity-manager",
+              "config": {
+                "resourceName": "ALL_USER_ENTITY_ACCESSS",
+                "permissions": null,
+                "updateEvent": "EVENT_USER_ENTITY_ACCESS_MODIFY",
+                "deleteEvent": "EVENT_USER_ENTITY_ACCESS_DELETE",
+                "createEvent": "EVENT_USER_ENTITY_ACCESS_INSERT",
+                "modalPosition": "centre",
+                "sizeColumnsToFit": true,
+                "enableSearchBar": false,
+                "reqrep": false,
+                "columns": "[\n  {\n    field: \"ENTITY_NAME\",\n  },\n  {\n    field: \"USER\",\n  }\n]",
+                "createFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"User\",\n      \"scope\": \"#/properties/USER\",\n      \"options\": {}\n    }\n  ]\n}",
+                "updateFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Entity Name\",\n      \"scope\": \"#/properties/ENTITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"User\",\n      \"scope\": \"#/properties/USER\",\n      \"options\": {}\n    }\n  ]\n}",
+                "index": 1
+              },
+              "componentName": "Static-UserEntities-manager",
+              "componentType": "manager"
+            }
+          ],
+          "layoutKey": "Static_1721917637692",
+          "FDC3EventHandlersEnabled": false
+        }
+      ],
+      "appName": "permissions",
+      "pkgName": "permissions",
+      "directory": "/tmp/tmp-57-RbEbPwfiwHfB/permissions",
+      "appSeed": {
+        "type": "local",
+        "name": "pbc-auth-seed",
+        "date": "2024-07-25T14:27:18.198Z"
+      },
+      "rootElement": "permissions-root",
+      "localGenId": "PERMISSIONS",
+      "applicationVersionWeb": "1.0.0",
+      "versions": {
+        "prerequisites": {
+          "foundationUI": "14.*",
+          "gsf": "8.*"
+        },
+        "dependencies": {
+          "authClientVersion": "1.0.7",
+          "authServerVersion": "8.1.0"
+        }
+      },
+      "FDC3": {
+        "includeDependencies": false,
+        "channels": []
+      },
+      "date": "Thu Jul 25 2024 14:27:18 GMT+0000 (Coordinated Universal Time)",
+      "utils": {
+        "changeCase": {}
+      }
+    }
+  ]
+}

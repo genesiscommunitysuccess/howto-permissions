@@ -1,0 +1,13 @@
+<!--
+    Services defined here will define ports and hosts of processes required by the application.
+
+  * Full documentation on service definitions may be found here >> https://docs.genesis.global/docs/develop/server-capabilities/runtime-configuration/service-definition/
+
+-->
+
+<configuration>
+  <service host="localhost" name="PERMISSIONS_MANAGER" port="9700"/>
+
+<!-- TODO Runtime 3. Add any new service definitions here-->
+
+</configuration>

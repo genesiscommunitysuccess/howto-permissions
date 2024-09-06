@@ -1,0 +1,24 @@
+<!--
+    Processes defined here will run the application.
+
+  * Full documentation on process definitions may be found here >> https://docs.genesis.global/docs/develop/server-capabilities/runtime-configuration/processes/
+
+-->
+
+<processes>
+  <process name="PERMISSIONS_MANAGER">
+    <groupId>PERMISSIONS</groupId>
+    <start>true</start>
+    <options>-javaagent:/app/run/permissions/lib/jacocoagent.jar=destfile=/app/run/runtime/logs/jacoco.exec,jmx=true -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=19910 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Xmx512m -DRedirectStreamsToLog=true</options>
+    <module>genesis-pal-eventhandler,genesis-pal-requestserver,genesis-pal-dataserver</module>
+    <package>global.genesis.dataserver.pal,global.genesis.eventhandler.pal,global.genesis.requestreply.pal</package>
+    <!-- AUTH-COMMENT Below we add the additional data server, event handler and reqrep into the config-->
+    <script>permissions-eventhandler.kts,permissions-reqrep.kts,permissions-admin-reqrep.kts,permissions-dataserver.kts,permissions-admin-dataserver.kts,permissions-admin-eventhandler.kts</script>
+    <description>Management of eventhandler, request server and data server processes</description>
+    <classpath>permissions-app*</classpath>
+    <language>pal</language>
+  </process>
+
+<!-- TODO Runtime 2. Add any new process definitions here-->
+
+</processes>
