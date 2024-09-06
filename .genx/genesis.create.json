@@ -1,0 +1,3294 @@
+{
+  "meta": {
+    "version": "1.98.1",
+    "generated": "Thu, 25 Jul 2024 14:27:18 GMT"
+  },
+  "data": {
+    "projectName": "permissions",
+    "description": "Example app for authorisation",
+    "components": [
+      "GenesisServerCore",
+      "User Authorization",
+      "DataServerCore"
+    ],
+    "fields": [
+      {
+        "name": "ENTITY_NAME",
+        "type": "STRING",
+        "defaultValue": null,
+        "nullable": false,
+        "readOnly": false,
+        "sensitive": false
+      },
+      {
+        "name": "USER",
+        "type": "STRING",
+        "defaultValue": null,
+        "nullable": false,
+        "readOnly": false,
+        "sensitive": false
+      },
+      {
+        "name": "TRADE_ID",
+        "type": "STRING",
+        "defaultValue": null,
+        "nullable": false,
+        "readOnly": false,
+        "sensitive": false
+      },
+      {
+        "name": "VERSION",
+        "type": "INT",
+        "defaultValue": null,
+        "nullable": false,
+        "readOnly": false
+      },
+      {
+        "name": "SIDE",
+        "type": "ENUM",
+        "defaultValue": "Buy",
+        "nullable": false,
+        "readOnly": false,
+        "values": [
+          "Buy",
+          "Sell"
+        ]
+      },
+      {
+        "name": "RATE",
+        "type": "DOUBLE",
+        "defaultValue": null,
+        "nullable": false,
+        "readOnly": false
+      },
+      {
+        "name": "NOTIONAL",
+        "type": "DOUBLE",
+        "defaultValue": null,
+        "nullable": false,
+        "readOnly": false
+      },
+      {
+        "name": "SETTLEMENT_DATE",
+        "type": "DATE",
+        "defaultValue": null,
+        "nullable": false,
+        "readOnly": false
+      },
+      {
+        "name": "SOURCE_CURRENCY",
+        "type": "STRING",
+        "defaultValue": null,
+        "nullable": false,
+        "readOnly": false,
+        "sensitive": false
+      },
+      {
+        "name": "TARGET_CURRENCY",
+        "type": "STRING",
+        "defaultValue": null,
+        "nullable": false,
+        "readOnly": false,
+        "sensitive": false
+      },
+      {
+        "name": "CUSTOMER_ID",
+        "type": "INT",
+        "defaultValue": null,
+        "nullable": false,
+        "readOnly": false
+      },
+      {
+        "name": "CUSTOMER_NAME",
+        "type": "STRING",
+        "defaultValue": null,
+        "nullable": false,
+        "readOnly": false,
+        "sensitive": false
+      }
+    ],
+    "tables": [
+      {
+        "name": "ENTITY",
+        "id": 11000,
+        "primaryKey": {
+          "id": null,
+          "name": null,
+          "fields": [
+            "ENTITY_NAME"
+          ],
+          "indexType": "UNIQUE"
+        },
+        "fields": [
+          {
+            "name": "ENTITY_NAME"
+          }
+        ],
+        "generatedFields": [],
+        "audit": true,
+        "generateCreateUpdateDelete": true,
+        "snapshot": true,
+        "realtimeQuery": {
+          "queryName": "ALL_ENTITYS",
+          "fields": [
+            "ENTITY_NAME"
+          ]
+        },
+        "indices": [],
+        "meta": {
+          "attrOrder": [
+            "ENTITY_NAME"
+          ]
+        }
+      },
+      {
+        "name": "USER_ENTITY_ACCESS",
+        "id": 11001,
+        "primaryKey": {
+          "id": null,
+          "name": null,
+          "fields": [
+            "USER"
+          ],
+          "indexType": "UNIQUE"
+        },
+        "fields": [
+          {
+            "name": "ENTITY_NAME",
+            "nullable": false
+          },
+          {
+            "name": "USER"
+          }
+        ],
+        "generatedFields": [],
+        "audit": true,
+        "generateCreateUpdateDelete": true,
+        "snapshot": true,
+        "realtimeQuery": {
+          "queryName": "ALL_USER_ENTITY_ACCESSS",
+          "fields": [
+            "ENTITY_NAME",
+            "USER"
+          ]
+        },
+        "indices": [],
+        "meta": {
+          "attrOrder": [
+            "ENTITY_NAME",
+            "USER"
+          ]
+        }
+      },
+      {
+        "name": "TRADE",
+        "id": 11002,
+        "primaryKey": {
+          "id": null,
+          "name": null,
+          "fields": [
+            "TRADE_ID"
+          ],
+          "indexType": "UNIQUE"
+        },
+        "fields": [
+          {
+            "name": "VERSION",
+            "nullable": false
+          },
+          {
+            "name": "ENTITY_NAME",
+            "nullable": false
+          },
+          {
+            "name": "SIDE"
+          },
+          {
+            "name": "RATE",
+            "nullable": false
+          },
+          {
+            "name": "NOTIONAL",
+            "nullable": false
+          },
+          {
+            "name": "SETTLEMENT_DATE",
+            "nullable": false
+          },
+          {
+            "name": "SOURCE_CURRENCY",
+            "nullable": false
+          },
+          {
+            "name": "TARGET_CURRENCY",
+            "nullable": false
+          },
+          {
+            "name": "CUSTOMER_ID",
+            "nullable": false
+          },
+          {
+            "name": "CUSTOMER_NAME",
+            "nullable": false
+          }
+        ],
+        "generatedFields": [
+          {
+            "fieldType": "STRING",
+            "generatedFieldType": "SEQUENCE",
+            "name": "TRADE_ID",
+            "sequence": "TD",
+            "useUUID": false
+          }
+        ],
+        "audit": true,
+        "generateCreateUpdateDelete": true,
+        "snapshot": true,
+        "updateRight": "TradeUpdate",
+        "viewRight": "TradeViewRestricted",
+        "realtimeQuery": {
+          "queryName": "ALL_TRADES",
+          "viewRight": "TradeViewRestricted",
+          "fields": [
+            "TRADE_ID",
+            "VERSION",
+            "ENTITY_NAME",
+            "SIDE",
+            "RATE",
+            "NOTIONAL",
+            "SETTLEMENT_DATE",
+            "SOURCE_CURRENCY",
+            "TARGET_CURRENCY",
+            "CUSTOMER_ID",
+            "CUSTOMER_NAME"
+          ]
+        },
+        "indices": [],
+        "meta": {
+          "attrOrder": [
+            "TRADE_ID",
+            "VERSION",
+            "ENTITY_NAME",
+            "SIDE",
+            "RATE",
+            "NOTIONAL",
+            "SETTLEMENT_DATE",
+            "SOURCE_CURRENCY",
+            "TARGET_CURRENCY",
+            "CUSTOMER_ID",
+            "CUSTOMER_NAME"
+          ]
+        }
+      }
+    ],
+    "consolidators": [],
+    "ui": {
+      "config": null,
+      "routes": [
+        {
+          "id": "c379d9b7-ff51-419e-9129-edf817fbc59e",
+          "name": "Trades",
+          "layoutType": null,
+          "permissions": null,
+          "tiles": [
+            {
+              "title": "Table Level",
+              "type": "entity-manager",
+              "config": {
+                "resourceName": "ALL_TRADES",
+                "permissions": {
+                  "updateRight": "TradeUpdate",
+                  "viewRight": "TradeViewRestricted"
+                },
+                "updateEvent": "EVENT_TRADE_MODIFY",
+                "deleteEvent": "EVENT_TRADE_DELETE",
+                "createEvent": "EVENT_TRADE_INSERT",
+                "modalPosition": "centre",
+                "sizeColumnsToFit": true,
+                "enableSearchBar": false,
+                "reqrep": false,
+                "columns": [
+                  {
+                    "field": "TRADE_ID",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "TRADE_ID",
+                      "displayName": "Trade Id",
+                      "alias": null,
+                      "id": "TRADE_IDID"
+                    }
+                  },
+                  {
+                    "field": "VERSION",
+                    "valueFormatter": {
+                      "type": "function",
+                      "name": "getNumberFormatter",
+                      "category": "formatter",
+                      "arguments": [
+                        "0,0",
+                        null
+                      ]
+                    },
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "numeric",
+                        "format": "Financial",
+                        "currency": "$ English (US)",
+                        "decimalPlaces": 0
+                      },
+                      "attribute": "VERSION",
+                      "displayName": "Version",
+                      "alias": null,
+                      "id": "VERSIONID"
+                    }
+                  },
+                  {
+                    "field": "ENTITY_NAME",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "ENTITY_NAME",
+                      "displayName": "Entity Name",
+                      "alias": null,
+                      "id": "ENTITY_NAMEID"
+                    }
+                  },
+                  {
+                    "field": "SIDE",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "enum"
+                      },
+                      "attribute": "SIDE",
+                      "displayName": "Side",
+                      "alias": null,
+                      "id": "SIDEID"
+                    }
+                  },
+                  {
+                    "field": "RATE",
+                    "valueFormatter": {
+                      "type": "function",
+                      "name": "getNumberFormatter",
+                      "category": "formatter",
+                      "arguments": [
+                        "0,0.00000",
+                        null
+                      ]
+                    },
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "numeric",
+                        "format": "Financial",
+                        "currency": "$ English (US)",
+                        "decimalPlaces": 5
+                      },
+                      "attribute": "RATE",
+                      "displayName": "Rate",
+                      "alias": null,
+                      "id": "RATEID"
+                    }
+                  },
+                  {
+                    "field": "NOTIONAL",
+                    "valueFormatter": {
+                      "type": "function",
+                      "name": "getNumberFormatter",
+                      "category": "formatter",
+                      "arguments": [
+                        "0,0.00",
+                        null
+                      ]
+                    },
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "numeric",
+                        "format": "Financial",
+                        "currency": "$ English (US)",
+                        "decimalPlaces": 2
+                      },
+                      "attribute": "NOTIONAL",
+                      "displayName": "Notional",
+                      "alias": null,
+                      "id": "NOTIONALID"
+                    }
+                  },
+                  {
+                    "field": "SETTLEMENT_DATE",
+                    "valueFormatter": {
+                      "type": "function",
+                      "name": "getDateFormatter",
+                      "category": "formatter",
+                      "arguments": [
+                        "en-GB",
+                        {
+                          "year": "numeric",
+                          "month": "short",
+                          "day": "2-digit",
+                          "timeZone": "UTC"
+                        }
+                      ]
+                    },
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "date",
+                        "format": "en-GB",
+                        "year": "numeric",
+                        "month": "short",
+                        "day": "2-digit"
+                      },
+                      "attribute": "SETTLEMENT_DATE",
+                      "displayName": "Settlement Date",
+                      "alias": null,
+                      "id": "SETTLEMENT_DATEID"
+                    }
+                  },
+                  {
+                    "field": "SOURCE_CURRENCY",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "SOURCE_CURRENCY",
+                      "displayName": "Source Currency",
+                      "alias": null,
+                      "id": "SOURCE_CURRENCYID"
+                    }
+                  },
+                  {
+                    "field": "TARGET_CURRENCY",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "TARGET_CURRENCY",
+                      "displayName": "Target Currency",
+                      "alias": null,
+                      "id": "TARGET_CURRENCYID"
+                    }
+                  },
+                  {
+                    "field": "CUSTOMER_ID",
+                    "valueFormatter": {
+                      "type": "function",
+                      "name": "getNumberFormatter",
+                      "category": "formatter",
+                      "arguments": [
+                        "0,0",
+                        null
+                      ]
+                    },
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "numeric",
+                        "format": "Financial",
+                        "currency": "$ English (US)",
+                        "decimalPlaces": 0
+                      },
+                      "attribute": "CUSTOMER_ID",
+                      "displayName": "Customer Id",
+                      "alias": null,
+                      "id": "CUSTOMER_IDID"
+                    }
+                  },
+                  {
+                    "field": "CUSTOMER_NAME",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "CUSTOMER_NAME",
+                      "displayName": "Customer Name",
+                      "alias": null,
+                      "id": "CUSTOMER_NAMEID"
+                    }
+                  }
+                ],
+                "createFormUiSchema": {
+                  "type": "VerticalLayout",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "label": "Trade Id",
+                      "scope": "#/properties/TRADE_ID",
+                      "options": {
+                        "hidden": true
+                      },
+                      "meta": {
+                        "createForm": {
+                          "mode": "hidden"
+                        },
+                        "alias": null,
+                        "attribute": "TRADE_ID",
+                        "id": "TRADE_IDID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Version",
+                      "scope": "#/properties/VERSION",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 0
+                        },
+                        "alias": null,
+                        "attribute": "VERSION",
+                        "id": "VERSIONID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Entity Name",
+                      "scope": "#/properties/ENTITY_NAME",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "ENTITY_NAME",
+                        "id": "ENTITY_NAMEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Side",
+                      "scope": "#/properties/SIDE",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "enum"
+                        },
+                        "alias": null,
+                        "attribute": "SIDE",
+                        "id": "SIDEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Rate",
+                      "scope": "#/properties/RATE",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 2
+                        },
+                        "alias": null,
+                        "attribute": "RATE",
+                        "id": "RATEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Notional",
+                      "scope": "#/properties/NOTIONAL",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 2
+                        },
+                        "alias": null,
+                        "attribute": "NOTIONAL",
+                        "id": "NOTIONALID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Settlement Date",
+                      "scope": "#/properties/SETTLEMENT_DATE",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "date",
+                          "format": "Unformatted",
+                          "year": "2-digit",
+                          "month": "2-digit",
+                          "day": "2-digit"
+                        },
+                        "alias": null,
+                        "attribute": "SETTLEMENT_DATE",
+                        "id": "SETTLEMENT_DATEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Source Currency",
+                      "scope": "#/properties/SOURCE_CURRENCY",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "SOURCE_CURRENCY",
+                        "id": "SOURCE_CURRENCYID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Target Currency",
+                      "scope": "#/properties/TARGET_CURRENCY",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "TARGET_CURRENCY",
+                        "id": "TARGET_CURRENCYID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Customer Id",
+                      "scope": "#/properties/CUSTOMER_ID",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 0
+                        },
+                        "alias": null,
+                        "attribute": "CUSTOMER_ID",
+                        "id": "CUSTOMER_IDID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Customer Name",
+                      "scope": "#/properties/CUSTOMER_NAME",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "CUSTOMER_NAME",
+                        "id": "CUSTOMER_NAMEID"
+                      }
+                    }
+                  ]
+                },
+                "updateFormUiSchema": {
+                  "type": "VerticalLayout",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "label": "Trade Id",
+                      "scope": "#/properties/TRADE_ID",
+                      "options": {
+                        "readonly": true
+                      },
+                      "meta": {
+                        "updateForm": {
+                          "mode": "read-only"
+                        },
+                        "alias": null,
+                        "attribute": "TRADE_ID",
+                        "id": "TRADE_IDID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Version",
+                      "scope": "#/properties/VERSION",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 0
+                        },
+                        "alias": null,
+                        "attribute": "VERSION",
+                        "id": "VERSIONID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Entity Name",
+                      "scope": "#/properties/ENTITY_NAME",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "ENTITY_NAME",
+                        "id": "ENTITY_NAMEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Side",
+                      "scope": "#/properties/SIDE",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "enum"
+                        },
+                        "alias": null,
+                        "attribute": "SIDE",
+                        "id": "SIDEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Rate",
+                      "scope": "#/properties/RATE",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 2
+                        },
+                        "alias": null,
+                        "attribute": "RATE",
+                        "id": "RATEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Notional",
+                      "scope": "#/properties/NOTIONAL",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 2
+                        },
+                        "alias": null,
+                        "attribute": "NOTIONAL",
+                        "id": "NOTIONALID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Settlement Date",
+                      "scope": "#/properties/SETTLEMENT_DATE",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "date",
+                          "format": "Unformatted",
+                          "year": "2-digit",
+                          "month": "2-digit",
+                          "day": "2-digit"
+                        },
+                        "alias": null,
+                        "attribute": "SETTLEMENT_DATE",
+                        "id": "SETTLEMENT_DATEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Source Currency",
+                      "scope": "#/properties/SOURCE_CURRENCY",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "SOURCE_CURRENCY",
+                        "id": "SOURCE_CURRENCYID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Target Currency",
+                      "scope": "#/properties/TARGET_CURRENCY",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "TARGET_CURRENCY",
+                        "id": "TARGET_CURRENCYID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Customer Id",
+                      "scope": "#/properties/CUSTOMER_ID",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 0
+                        },
+                        "alias": null,
+                        "attribute": "CUSTOMER_ID",
+                        "id": "CUSTOMER_IDID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Customer Name",
+                      "scope": "#/properties/CUSTOMER_NAME",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "CUSTOMER_NAME",
+                        "id": "CUSTOMER_NAMEID"
+                      }
+                    }
+                  ]
+                },
+                "meta": {
+                  "inactiveGridConfig": [],
+                  "inactiveFormConfig": [],
+                  "configAttrNames": [
+                    {
+                      "name": "TRADE_ID",
+                      "alias": null
+                    },
+                    {
+                      "name": "VERSION",
+                      "alias": null
+                    },
+                    {
+                      "name": "ENTITY_NAME",
+                      "alias": null
+                    },
+                    {
+                      "name": "SIDE",
+                      "alias": null
+                    },
+                    {
+                      "name": "RATE",
+                      "alias": null
+                    },
+                    {
+                      "name": "NOTIONAL",
+                      "alias": null
+                    },
+                    {
+                      "name": "SETTLEMENT_DATE",
+                      "alias": null
+                    },
+                    {
+                      "name": "SOURCE_CURRENCY",
+                      "alias": null
+                    },
+                    {
+                      "name": "TARGET_CURRENCY",
+                      "alias": null
+                    },
+                    {
+                      "name": "CUSTOMER_ID",
+                      "alias": null
+                    },
+                    {
+                      "name": "CUSTOMER_NAME",
+                      "alias": null
+                    }
+                  ]
+                }
+              },
+              "meta": {}
+            },
+            {
+              "title": "Row Level",
+              "type": "entity-manager",
+              "config": {
+                "resourceName": "ALL_TRADES",
+                "permissions": {
+                  "updateRight": "TradeUpdate",
+                  "viewRight": "TradeViewRestricted"
+                },
+                "updateEvent": "EVENT_TRADE_MODIFY",
+                "deleteEvent": "EVENT_TRADE_DELETE",
+                "createEvent": "EVENT_TRADE_INSERT",
+                "modalPosition": "centre",
+                "sizeColumnsToFit": true,
+                "enableSearchBar": false,
+                "reqrep": false,
+                "columns": [
+                  {
+                    "field": "TRADE_ID",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "TRADE_ID",
+                      "displayName": "Trade Id",
+                      "alias": null,
+                      "id": "TRADE_IDID"
+                    }
+                  },
+                  {
+                    "field": "VERSION",
+                    "valueFormatter": {
+                      "type": "function",
+                      "name": "getNumberFormatter",
+                      "category": "formatter",
+                      "arguments": [
+                        "0,0",
+                        null
+                      ]
+                    },
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "numeric",
+                        "format": "Financial",
+                        "currency": "$ English (US)",
+                        "decimalPlaces": 0
+                      },
+                      "attribute": "VERSION",
+                      "displayName": "Version",
+                      "alias": null,
+                      "id": "VERSIONID"
+                    }
+                  },
+                  {
+                    "field": "ENTITY_NAME",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "ENTITY_NAME",
+                      "displayName": "Entity Name",
+                      "alias": null,
+                      "id": "ENTITY_NAMEID"
+                    }
+                  },
+                  {
+                    "field": "SIDE",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "enum"
+                      },
+                      "attribute": "SIDE",
+                      "displayName": "Side",
+                      "alias": null,
+                      "id": "SIDEID"
+                    }
+                  },
+                  {
+                    "field": "RATE",
+                    "valueFormatter": {
+                      "type": "function",
+                      "name": "getNumberFormatter",
+                      "category": "formatter",
+                      "arguments": [
+                        "0,0.00000",
+                        null
+                      ]
+                    },
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "numeric",
+                        "format": "Financial",
+                        "currency": "$ English (US)",
+                        "decimalPlaces": 5
+                      },
+                      "attribute": "RATE",
+                      "displayName": "Rate",
+                      "alias": null,
+                      "id": "RATEID"
+                    }
+                  },
+                  {
+                    "field": "NOTIONAL",
+                    "valueFormatter": {
+                      "type": "function",
+                      "name": "getNumberFormatter",
+                      "category": "formatter",
+                      "arguments": [
+                        "0,0.00",
+                        null
+                      ]
+                    },
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "numeric",
+                        "format": "Financial",
+                        "currency": "$ English (US)",
+                        "decimalPlaces": 2
+                      },
+                      "attribute": "NOTIONAL",
+                      "displayName": "Notional",
+                      "alias": null,
+                      "id": "NOTIONALID"
+                    }
+                  },
+                  {
+                    "field": "SETTLEMENT_DATE",
+                    "valueFormatter": {
+                      "type": "function",
+                      "name": "getDateFormatter",
+                      "category": "formatter",
+                      "arguments": [
+                        "en-GB",
+                        {
+                          "year": "numeric",
+                          "month": "short",
+                          "day": "2-digit",
+                          "timeZone": "UTC"
+                        }
+                      ]
+                    },
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "date",
+                        "format": "en-GB",
+                        "year": "numeric",
+                        "month": "short",
+                        "day": "2-digit"
+                      },
+                      "attribute": "SETTLEMENT_DATE",
+                      "displayName": "Settlement Date",
+                      "alias": null,
+                      "id": "SETTLEMENT_DATEID"
+                    }
+                  },
+                  {
+                    "field": "SOURCE_CURRENCY",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "SOURCE_CURRENCY",
+                      "displayName": "Source Currency",
+                      "alias": null,
+                      "id": "SOURCE_CURRENCYID"
+                    }
+                  },
+                  {
+                    "field": "TARGET_CURRENCY",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "TARGET_CURRENCY",
+                      "displayName": "Target Currency",
+                      "alias": null,
+                      "id": "TARGET_CURRENCYID"
+                    }
+                  },
+                  {
+                    "field": "CUSTOMER_ID",
+                    "valueFormatter": {
+                      "type": "function",
+                      "name": "getNumberFormatter",
+                      "category": "formatter",
+                      "arguments": [
+                        "0,0",
+                        null
+                      ]
+                    },
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "numeric",
+                        "format": "Financial",
+                        "currency": "$ English (US)",
+                        "decimalPlaces": 0
+                      },
+                      "attribute": "CUSTOMER_ID",
+                      "displayName": "Customer Id",
+                      "alias": null,
+                      "id": "CUSTOMER_IDID"
+                    }
+                  },
+                  {
+                    "field": "CUSTOMER_NAME",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "CUSTOMER_NAME",
+                      "displayName": "Customer Name",
+                      "alias": null,
+                      "id": "CUSTOMER_NAMEID"
+                    }
+                  }
+                ],
+                "createFormUiSchema": {
+                  "type": "VerticalLayout",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "label": "Trade Id",
+                      "scope": "#/properties/TRADE_ID",
+                      "options": {
+                        "hidden": true
+                      },
+                      "meta": {
+                        "createForm": {
+                          "mode": "hidden"
+                        },
+                        "alias": null,
+                        "attribute": "TRADE_ID",
+                        "id": "TRADE_IDID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Version",
+                      "scope": "#/properties/VERSION",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 0
+                        },
+                        "alias": null,
+                        "attribute": "VERSION",
+                        "id": "VERSIONID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Entity Name",
+                      "scope": "#/properties/ENTITY_NAME",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "ENTITY_NAME",
+                        "id": "ENTITY_NAMEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Side",
+                      "scope": "#/properties/SIDE",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "enum"
+                        },
+                        "alias": null,
+                        "attribute": "SIDE",
+                        "id": "SIDEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Rate",
+                      "scope": "#/properties/RATE",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 2
+                        },
+                        "alias": null,
+                        "attribute": "RATE",
+                        "id": "RATEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Notional",
+                      "scope": "#/properties/NOTIONAL",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 2
+                        },
+                        "alias": null,
+                        "attribute": "NOTIONAL",
+                        "id": "NOTIONALID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Settlement Date",
+                      "scope": "#/properties/SETTLEMENT_DATE",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "date",
+                          "format": "Unformatted",
+                          "year": "2-digit",
+                          "month": "2-digit",
+                          "day": "2-digit"
+                        },
+                        "alias": null,
+                        "attribute": "SETTLEMENT_DATE",
+                        "id": "SETTLEMENT_DATEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Source Currency",
+                      "scope": "#/properties/SOURCE_CURRENCY",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "SOURCE_CURRENCY",
+                        "id": "SOURCE_CURRENCYID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Target Currency",
+                      "scope": "#/properties/TARGET_CURRENCY",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "TARGET_CURRENCY",
+                        "id": "TARGET_CURRENCYID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Customer Id",
+                      "scope": "#/properties/CUSTOMER_ID",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 0
+                        },
+                        "alias": null,
+                        "attribute": "CUSTOMER_ID",
+                        "id": "CUSTOMER_IDID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Customer Name",
+                      "scope": "#/properties/CUSTOMER_NAME",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "CUSTOMER_NAME",
+                        "id": "CUSTOMER_NAMEID"
+                      }
+                    }
+                  ]
+                },
+                "updateFormUiSchema": {
+                  "type": "VerticalLayout",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "label": "Trade Id",
+                      "scope": "#/properties/TRADE_ID",
+                      "options": {
+                        "readonly": true
+                      },
+                      "meta": {
+                        "updateForm": {
+                          "mode": "read-only"
+                        },
+                        "alias": null,
+                        "attribute": "TRADE_ID",
+                        "id": "TRADE_IDID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Version",
+                      "scope": "#/properties/VERSION",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 0
+                        },
+                        "alias": null,
+                        "attribute": "VERSION",
+                        "id": "VERSIONID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Entity Name",
+                      "scope": "#/properties/ENTITY_NAME",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "ENTITY_NAME",
+                        "id": "ENTITY_NAMEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Side",
+                      "scope": "#/properties/SIDE",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "enum"
+                        },
+                        "alias": null,
+                        "attribute": "SIDE",
+                        "id": "SIDEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Rate",
+                      "scope": "#/properties/RATE",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 2
+                        },
+                        "alias": null,
+                        "attribute": "RATE",
+                        "id": "RATEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Notional",
+                      "scope": "#/properties/NOTIONAL",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 2
+                        },
+                        "alias": null,
+                        "attribute": "NOTIONAL",
+                        "id": "NOTIONALID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Settlement Date",
+                      "scope": "#/properties/SETTLEMENT_DATE",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "date",
+                          "format": "Unformatted",
+                          "year": "2-digit",
+                          "month": "2-digit",
+                          "day": "2-digit"
+                        },
+                        "alias": null,
+                        "attribute": "SETTLEMENT_DATE",
+                        "id": "SETTLEMENT_DATEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Source Currency",
+                      "scope": "#/properties/SOURCE_CURRENCY",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "SOURCE_CURRENCY",
+                        "id": "SOURCE_CURRENCYID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Target Currency",
+                      "scope": "#/properties/TARGET_CURRENCY",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "TARGET_CURRENCY",
+                        "id": "TARGET_CURRENCYID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Customer Id",
+                      "scope": "#/properties/CUSTOMER_ID",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 0
+                        },
+                        "alias": null,
+                        "attribute": "CUSTOMER_ID",
+                        "id": "CUSTOMER_IDID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Customer Name",
+                      "scope": "#/properties/CUSTOMER_NAME",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "CUSTOMER_NAME",
+                        "id": "CUSTOMER_NAMEID"
+                      }
+                    }
+                  ]
+                },
+                "meta": {
+                  "inactiveGridConfig": [],
+                  "inactiveFormConfig": [],
+                  "configAttrNames": [
+                    {
+                      "name": "TRADE_ID",
+                      "alias": null
+                    },
+                    {
+                      "name": "VERSION",
+                      "alias": null
+                    },
+                    {
+                      "name": "ENTITY_NAME",
+                      "alias": null
+                    },
+                    {
+                      "name": "SIDE",
+                      "alias": null
+                    },
+                    {
+                      "name": "RATE",
+                      "alias": null
+                    },
+                    {
+                      "name": "NOTIONAL",
+                      "alias": null
+                    },
+                    {
+                      "name": "SETTLEMENT_DATE",
+                      "alias": null
+                    },
+                    {
+                      "name": "SOURCE_CURRENCY",
+                      "alias": null
+                    },
+                    {
+                      "name": "TARGET_CURRENCY",
+                      "alias": null
+                    },
+                    {
+                      "name": "CUSTOMER_ID",
+                      "alias": null
+                    },
+                    {
+                      "name": "CUSTOMER_NAME",
+                      "alias": null
+                    }
+                  ]
+                }
+              },
+              "meta": {}
+            },
+            {
+              "title": "Column Level",
+              "type": "entity-manager",
+              "config": {
+                "resourceName": "ALL_TRADES",
+                "permissions": {
+                  "updateRight": "TradeUpdate",
+                  "viewRight": "TradeViewRestricted"
+                },
+                "updateEvent": "EVENT_TRADE_MODIFY",
+                "deleteEvent": "EVENT_TRADE_DELETE",
+                "createEvent": "EVENT_TRADE_INSERT",
+                "modalPosition": "centre",
+                "sizeColumnsToFit": true,
+                "enableSearchBar": false,
+                "reqrep": false,
+                "columns": [
+                  {
+                    "field": "TRADE_ID",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "TRADE_ID",
+                      "displayName": "Trade Id",
+                      "alias": null,
+                      "id": "TRADE_IDID"
+                    }
+                  },
+                  {
+                    "field": "VERSION",
+                    "valueFormatter": {
+                      "type": "function",
+                      "name": "getNumberFormatter",
+                      "category": "formatter",
+                      "arguments": [
+                        "0,0",
+                        null
+                      ]
+                    },
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "numeric",
+                        "format": "Financial",
+                        "currency": "$ English (US)",
+                        "decimalPlaces": 0
+                      },
+                      "attribute": "VERSION",
+                      "displayName": "Version",
+                      "alias": null,
+                      "id": "VERSIONID"
+                    }
+                  },
+                  {
+                    "field": "ENTITY_NAME",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "ENTITY_NAME",
+                      "displayName": "Entity Name",
+                      "alias": null,
+                      "id": "ENTITY_NAMEID"
+                    }
+                  },
+                  {
+                    "field": "SIDE",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "enum"
+                      },
+                      "attribute": "SIDE",
+                      "displayName": "Side",
+                      "alias": null,
+                      "id": "SIDEID"
+                    }
+                  },
+                  {
+                    "field": "RATE",
+                    "valueFormatter": {
+                      "type": "function",
+                      "name": "getNumberFormatter",
+                      "category": "formatter",
+                      "arguments": [
+                        "0,0.00000",
+                        null
+                      ]
+                    },
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "numeric",
+                        "format": "Financial",
+                        "currency": "$ English (US)",
+                        "decimalPlaces": 5
+                      },
+                      "attribute": "RATE",
+                      "displayName": "Rate",
+                      "alias": null,
+                      "id": "RATEID"
+                    }
+                  },
+                  {
+                    "field": "NOTIONAL",
+                    "valueFormatter": {
+                      "type": "function",
+                      "name": "getNumberFormatter",
+                      "category": "formatter",
+                      "arguments": [
+                        "0,0.00",
+                        null
+                      ]
+                    },
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "numeric",
+                        "format": "Financial",
+                        "currency": "$ English (US)",
+                        "decimalPlaces": 2
+                      },
+                      "attribute": "NOTIONAL",
+                      "displayName": "Notional",
+                      "alias": null,
+                      "id": "NOTIONALID"
+                    }
+                  },
+                  {
+                    "field": "SETTLEMENT_DATE",
+                    "valueFormatter": {
+                      "type": "function",
+                      "name": "getDateFormatter",
+                      "category": "formatter",
+                      "arguments": [
+                        "en-GB",
+                        {
+                          "year": "numeric",
+                          "month": "short",
+                          "day": "2-digit",
+                          "timeZone": "UTC"
+                        }
+                      ]
+                    },
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "date",
+                        "format": "en-GB",
+                        "year": "numeric",
+                        "month": "short",
+                        "day": "2-digit"
+                      },
+                      "attribute": "SETTLEMENT_DATE",
+                      "displayName": "Settlement Date",
+                      "alias": null,
+                      "id": "SETTLEMENT_DATEID"
+                    }
+                  },
+                  {
+                    "field": "SOURCE_CURRENCY",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "SOURCE_CURRENCY",
+                      "displayName": "Source Currency",
+                      "alias": null,
+                      "id": "SOURCE_CURRENCYID"
+                    }
+                  },
+                  {
+                    "field": "TARGET_CURRENCY",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "TARGET_CURRENCY",
+                      "displayName": "Target Currency",
+                      "alias": null,
+                      "id": "TARGET_CURRENCYID"
+                    }
+                  },
+                  {
+                    "field": "CUSTOMER_ID",
+                    "valueFormatter": {
+                      "type": "function",
+                      "name": "getNumberFormatter",
+                      "category": "formatter",
+                      "arguments": [
+                        "0,0",
+                        null
+                      ]
+                    },
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "numeric",
+                        "format": "Financial",
+                        "currency": "$ English (US)",
+                        "decimalPlaces": 0
+                      },
+                      "attribute": "CUSTOMER_ID",
+                      "displayName": "Customer Id",
+                      "alias": null,
+                      "id": "CUSTOMER_IDID"
+                    }
+                  },
+                  {
+                    "field": "CUSTOMER_NAME",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "CUSTOMER_NAME",
+                      "displayName": "Customer Name",
+                      "alias": null,
+                      "id": "CUSTOMER_NAMEID"
+                    }
+                  }
+                ],
+                "createFormUiSchema": {
+                  "type": "VerticalLayout",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "label": "Trade Id",
+                      "scope": "#/properties/TRADE_ID",
+                      "options": {
+                        "hidden": true
+                      },
+                      "meta": {
+                        "createForm": {
+                          "mode": "hidden"
+                        },
+                        "alias": null,
+                        "attribute": "TRADE_ID",
+                        "id": "TRADE_IDID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Version",
+                      "scope": "#/properties/VERSION",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 0
+                        },
+                        "alias": null,
+                        "attribute": "VERSION",
+                        "id": "VERSIONID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Entity Name",
+                      "scope": "#/properties/ENTITY_NAME",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "ENTITY_NAME",
+                        "id": "ENTITY_NAMEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Side",
+                      "scope": "#/properties/SIDE",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "enum"
+                        },
+                        "alias": null,
+                        "attribute": "SIDE",
+                        "id": "SIDEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Rate",
+                      "scope": "#/properties/RATE",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 2
+                        },
+                        "alias": null,
+                        "attribute": "RATE",
+                        "id": "RATEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Notional",
+                      "scope": "#/properties/NOTIONAL",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 2
+                        },
+                        "alias": null,
+                        "attribute": "NOTIONAL",
+                        "id": "NOTIONALID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Settlement Date",
+                      "scope": "#/properties/SETTLEMENT_DATE",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "date",
+                          "format": "Unformatted",
+                          "year": "2-digit",
+                          "month": "2-digit",
+                          "day": "2-digit"
+                        },
+                        "alias": null,
+                        "attribute": "SETTLEMENT_DATE",
+                        "id": "SETTLEMENT_DATEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Source Currency",
+                      "scope": "#/properties/SOURCE_CURRENCY",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "SOURCE_CURRENCY",
+                        "id": "SOURCE_CURRENCYID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Target Currency",
+                      "scope": "#/properties/TARGET_CURRENCY",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "TARGET_CURRENCY",
+                        "id": "TARGET_CURRENCYID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Customer Id",
+                      "scope": "#/properties/CUSTOMER_ID",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 0
+                        },
+                        "alias": null,
+                        "attribute": "CUSTOMER_ID",
+                        "id": "CUSTOMER_IDID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Customer Name",
+                      "scope": "#/properties/CUSTOMER_NAME",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "CUSTOMER_NAME",
+                        "id": "CUSTOMER_NAMEID"
+                      }
+                    }
+                  ]
+                },
+                "updateFormUiSchema": {
+                  "type": "VerticalLayout",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "label": "Trade Id",
+                      "scope": "#/properties/TRADE_ID",
+                      "options": {
+                        "readonly": true
+                      },
+                      "meta": {
+                        "updateForm": {
+                          "mode": "read-only"
+                        },
+                        "alias": null,
+                        "attribute": "TRADE_ID",
+                        "id": "TRADE_IDID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Version",
+                      "scope": "#/properties/VERSION",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 0
+                        },
+                        "alias": null,
+                        "attribute": "VERSION",
+                        "id": "VERSIONID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Entity Name",
+                      "scope": "#/properties/ENTITY_NAME",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "ENTITY_NAME",
+                        "id": "ENTITY_NAMEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Side",
+                      "scope": "#/properties/SIDE",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "enum"
+                        },
+                        "alias": null,
+                        "attribute": "SIDE",
+                        "id": "SIDEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Rate",
+                      "scope": "#/properties/RATE",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 2
+                        },
+                        "alias": null,
+                        "attribute": "RATE",
+                        "id": "RATEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Notional",
+                      "scope": "#/properties/NOTIONAL",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 2
+                        },
+                        "alias": null,
+                        "attribute": "NOTIONAL",
+                        "id": "NOTIONALID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Settlement Date",
+                      "scope": "#/properties/SETTLEMENT_DATE",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "date",
+                          "format": "Unformatted",
+                          "year": "2-digit",
+                          "month": "2-digit",
+                          "day": "2-digit"
+                        },
+                        "alias": null,
+                        "attribute": "SETTLEMENT_DATE",
+                        "id": "SETTLEMENT_DATEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Source Currency",
+                      "scope": "#/properties/SOURCE_CURRENCY",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "SOURCE_CURRENCY",
+                        "id": "SOURCE_CURRENCYID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Target Currency",
+                      "scope": "#/properties/TARGET_CURRENCY",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "TARGET_CURRENCY",
+                        "id": "TARGET_CURRENCYID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Customer Id",
+                      "scope": "#/properties/CUSTOMER_ID",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 0
+                        },
+                        "alias": null,
+                        "attribute": "CUSTOMER_ID",
+                        "id": "CUSTOMER_IDID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Customer Name",
+                      "scope": "#/properties/CUSTOMER_NAME",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "CUSTOMER_NAME",
+                        "id": "CUSTOMER_NAMEID"
+                      }
+                    }
+                  ]
+                },
+                "meta": {
+                  "inactiveGridConfig": [],
+                  "inactiveFormConfig": [],
+                  "configAttrNames": [
+                    {
+                      "name": "TRADE_ID",
+                      "alias": null
+                    },
+                    {
+                      "name": "VERSION",
+                      "alias": null
+                    },
+                    {
+                      "name": "ENTITY_NAME",
+                      "alias": null
+                    },
+                    {
+                      "name": "SIDE",
+                      "alias": null
+                    },
+                    {
+                      "name": "RATE",
+                      "alias": null
+                    },
+                    {
+                      "name": "NOTIONAL",
+                      "alias": null
+                    },
+                    {
+                      "name": "SETTLEMENT_DATE",
+                      "alias": null
+                    },
+                    {
+                      "name": "SOURCE_CURRENCY",
+                      "alias": null
+                    },
+                    {
+                      "name": "TARGET_CURRENCY",
+                      "alias": null
+                    },
+                    {
+                      "name": "CUSTOMER_ID",
+                      "alias": null
+                    },
+                    {
+                      "name": "CUSTOMER_NAME",
+                      "alias": null
+                    }
+                  ]
+                }
+              },
+              "meta": {}
+            },
+            {
+              "title": "Row and Column Level",
+              "type": "entity-manager",
+              "config": {
+                "resourceName": "ALL_TRADES",
+                "permissions": {
+                  "updateRight": "TradeUpdate",
+                  "viewRight": "TradeViewRestricted"
+                },
+                "updateEvent": "EVENT_TRADE_MODIFY",
+                "deleteEvent": "EVENT_TRADE_DELETE",
+                "createEvent": "EVENT_TRADE_INSERT",
+                "modalPosition": "centre",
+                "sizeColumnsToFit": true,
+                "enableSearchBar": false,
+                "reqrep": false,
+                "columns": [
+                  {
+                    "field": "TRADE_ID",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "TRADE_ID",
+                      "displayName": "Trade Id",
+                      "alias": null,
+                      "id": "TRADE_IDID"
+                    }
+                  },
+                  {
+                    "field": "VERSION",
+                    "valueFormatter": {
+                      "type": "function",
+                      "name": "getNumberFormatter",
+                      "category": "formatter",
+                      "arguments": [
+                        "0,0",
+                        null
+                      ]
+                    },
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "numeric",
+                        "format": "Financial",
+                        "currency": "$ English (US)",
+                        "decimalPlaces": 0
+                      },
+                      "attribute": "VERSION",
+                      "displayName": "Version",
+                      "alias": null,
+                      "id": "VERSIONID"
+                    }
+                  },
+                  {
+                    "field": "ENTITY_NAME",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "ENTITY_NAME",
+                      "displayName": "Entity Name",
+                      "alias": null,
+                      "id": "ENTITY_NAMEID"
+                    }
+                  },
+                  {
+                    "field": "SIDE",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "enum"
+                      },
+                      "attribute": "SIDE",
+                      "displayName": "Side",
+                      "alias": null,
+                      "id": "SIDEID"
+                    }
+                  },
+                  {
+                    "field": "RATE",
+                    "valueFormatter": {
+                      "type": "function",
+                      "name": "getNumberFormatter",
+                      "category": "formatter",
+                      "arguments": [
+                        "0,0.00000",
+                        null
+                      ]
+                    },
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "numeric",
+                        "format": "Financial",
+                        "currency": "$ English (US)",
+                        "decimalPlaces": 5
+                      },
+                      "attribute": "RATE",
+                      "displayName": "Rate",
+                      "alias": null,
+                      "id": "RATEID"
+                    }
+                  },
+                  {
+                    "field": "NOTIONAL",
+                    "valueFormatter": {
+                      "type": "function",
+                      "name": "getNumberFormatter",
+                      "category": "formatter",
+                      "arguments": [
+                        "0,0.00",
+                        null
+                      ]
+                    },
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "numeric",
+                        "format": "Financial",
+                        "currency": "$ English (US)",
+                        "decimalPlaces": 2
+                      },
+                      "attribute": "NOTIONAL",
+                      "displayName": "Notional",
+                      "alias": null,
+                      "id": "NOTIONALID"
+                    }
+                  },
+                  {
+                    "field": "SETTLEMENT_DATE",
+                    "valueFormatter": {
+                      "type": "function",
+                      "name": "getDateFormatter",
+                      "category": "formatter",
+                      "arguments": [
+                        "en-GB",
+                        {
+                          "year": "numeric",
+                          "month": "short",
+                          "day": "2-digit",
+                          "timeZone": "UTC"
+                        }
+                      ]
+                    },
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "date",
+                        "format": "en-GB",
+                        "year": "numeric",
+                        "month": "short",
+                        "day": "2-digit"
+                      },
+                      "attribute": "SETTLEMENT_DATE",
+                      "displayName": "Settlement Date",
+                      "alias": null,
+                      "id": "SETTLEMENT_DATEID"
+                    }
+                  },
+                  {
+                    "field": "SOURCE_CURRENCY",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "SOURCE_CURRENCY",
+                      "displayName": "Source Currency",
+                      "alias": null,
+                      "id": "SOURCE_CURRENCYID"
+                    }
+                  },
+                  {
+                    "field": "TARGET_CURRENCY",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "TARGET_CURRENCY",
+                      "displayName": "Target Currency",
+                      "alias": null,
+                      "id": "TARGET_CURRENCYID"
+                    }
+                  },
+                  {
+                    "field": "CUSTOMER_ID",
+                    "valueFormatter": {
+                      "type": "function",
+                      "name": "getNumberFormatter",
+                      "category": "formatter",
+                      "arguments": [
+                        "0,0",
+                        null
+                      ]
+                    },
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "numeric",
+                        "format": "Financial",
+                        "currency": "$ English (US)",
+                        "decimalPlaces": 0
+                      },
+                      "attribute": "CUSTOMER_ID",
+                      "displayName": "Customer Id",
+                      "alias": null,
+                      "id": "CUSTOMER_IDID"
+                    }
+                  },
+                  {
+                    "field": "CUSTOMER_NAME",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "CUSTOMER_NAME",
+                      "displayName": "Customer Name",
+                      "alias": null,
+                      "id": "CUSTOMER_NAMEID"
+                    }
+                  }
+                ],
+                "createFormUiSchema": {
+                  "type": "VerticalLayout",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "label": "Trade Id",
+                      "scope": "#/properties/TRADE_ID",
+                      "options": {
+                        "hidden": true
+                      },
+                      "meta": {
+                        "createForm": {
+                          "mode": "hidden"
+                        },
+                        "alias": null,
+                        "attribute": "TRADE_ID",
+                        "id": "TRADE_IDID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Version",
+                      "scope": "#/properties/VERSION",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 0
+                        },
+                        "alias": null,
+                        "attribute": "VERSION",
+                        "id": "VERSIONID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Entity Name",
+                      "scope": "#/properties/ENTITY_NAME",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "ENTITY_NAME",
+                        "id": "ENTITY_NAMEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Side",
+                      "scope": "#/properties/SIDE",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "enum"
+                        },
+                        "alias": null,
+                        "attribute": "SIDE",
+                        "id": "SIDEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Rate",
+                      "scope": "#/properties/RATE",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 2
+                        },
+                        "alias": null,
+                        "attribute": "RATE",
+                        "id": "RATEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Notional",
+                      "scope": "#/properties/NOTIONAL",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 2
+                        },
+                        "alias": null,
+                        "attribute": "NOTIONAL",
+                        "id": "NOTIONALID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Settlement Date",
+                      "scope": "#/properties/SETTLEMENT_DATE",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "date",
+                          "format": "Unformatted",
+                          "year": "2-digit",
+                          "month": "2-digit",
+                          "day": "2-digit"
+                        },
+                        "alias": null,
+                        "attribute": "SETTLEMENT_DATE",
+                        "id": "SETTLEMENT_DATEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Source Currency",
+                      "scope": "#/properties/SOURCE_CURRENCY",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "SOURCE_CURRENCY",
+                        "id": "SOURCE_CURRENCYID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Target Currency",
+                      "scope": "#/properties/TARGET_CURRENCY",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "TARGET_CURRENCY",
+                        "id": "TARGET_CURRENCYID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Customer Id",
+                      "scope": "#/properties/CUSTOMER_ID",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 0
+                        },
+                        "alias": null,
+                        "attribute": "CUSTOMER_ID",
+                        "id": "CUSTOMER_IDID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Customer Name",
+                      "scope": "#/properties/CUSTOMER_NAME",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "CUSTOMER_NAME",
+                        "id": "CUSTOMER_NAMEID"
+                      }
+                    }
+                  ]
+                },
+                "updateFormUiSchema": {
+                  "type": "VerticalLayout",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "label": "Trade Id",
+                      "scope": "#/properties/TRADE_ID",
+                      "options": {
+                        "readonly": true
+                      },
+                      "meta": {
+                        "updateForm": {
+                          "mode": "read-only"
+                        },
+                        "alias": null,
+                        "attribute": "TRADE_ID",
+                        "id": "TRADE_IDID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Version",
+                      "scope": "#/properties/VERSION",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 0
+                        },
+                        "alias": null,
+                        "attribute": "VERSION",
+                        "id": "VERSIONID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Entity Name",
+                      "scope": "#/properties/ENTITY_NAME",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "ENTITY_NAME",
+                        "id": "ENTITY_NAMEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Side",
+                      "scope": "#/properties/SIDE",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "enum"
+                        },
+                        "alias": null,
+                        "attribute": "SIDE",
+                        "id": "SIDEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Rate",
+                      "scope": "#/properties/RATE",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 2
+                        },
+                        "alias": null,
+                        "attribute": "RATE",
+                        "id": "RATEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Notional",
+                      "scope": "#/properties/NOTIONAL",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 2
+                        },
+                        "alias": null,
+                        "attribute": "NOTIONAL",
+                        "id": "NOTIONALID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Settlement Date",
+                      "scope": "#/properties/SETTLEMENT_DATE",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "date",
+                          "format": "Unformatted",
+                          "year": "2-digit",
+                          "month": "2-digit",
+                          "day": "2-digit"
+                        },
+                        "alias": null,
+                        "attribute": "SETTLEMENT_DATE",
+                        "id": "SETTLEMENT_DATEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Source Currency",
+                      "scope": "#/properties/SOURCE_CURRENCY",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "SOURCE_CURRENCY",
+                        "id": "SOURCE_CURRENCYID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Target Currency",
+                      "scope": "#/properties/TARGET_CURRENCY",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "TARGET_CURRENCY",
+                        "id": "TARGET_CURRENCYID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Customer Id",
+                      "scope": "#/properties/CUSTOMER_ID",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 0
+                        },
+                        "alias": null,
+                        "attribute": "CUSTOMER_ID",
+                        "id": "CUSTOMER_IDID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Customer Name",
+                      "scope": "#/properties/CUSTOMER_NAME",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "CUSTOMER_NAME",
+                        "id": "CUSTOMER_NAMEID"
+                      }
+                    }
+                  ]
+                },
+                "meta": {
+                  "inactiveGridConfig": [],
+                  "inactiveFormConfig": [],
+                  "configAttrNames": [
+                    {
+                      "name": "TRADE_ID",
+                      "alias": null
+                    },
+                    {
+                      "name": "VERSION",
+                      "alias": null
+                    },
+                    {
+                      "name": "ENTITY_NAME",
+                      "alias": null
+                    },
+                    {
+                      "name": "SIDE",
+                      "alias": null
+                    },
+                    {
+                      "name": "RATE",
+                      "alias": null
+                    },
+                    {
+                      "name": "NOTIONAL",
+                      "alias": null
+                    },
+                    {
+                      "name": "SETTLEMENT_DATE",
+                      "alias": null
+                    },
+                    {
+                      "name": "SOURCE_CURRENCY",
+                      "alias": null
+                    },
+                    {
+                      "name": "TARGET_CURRENCY",
+                      "alias": null
+                    },
+                    {
+                      "name": "CUSTOMER_ID",
+                      "alias": null
+                    },
+                    {
+                      "name": "CUSTOMER_NAME",
+                      "alias": null
+                    }
+                  ]
+                }
+              },
+              "meta": {}
+            }
+          ]
+        },
+        {
+          "id": "c1956de3-aa26-4c4e-81aa-6979d6b0c922",
+          "name": "Static",
+          "layoutType": null,
+          "permissions": null,
+          "tiles": [
+            {
+              "title": "Entities",
+              "type": "entity-manager",
+              "config": {
+                "resourceName": "ALL_ENTITYS",
+                "permissions": null,
+                "updateEvent": "EVENT_ENTITY_MODIFY",
+                "deleteEvent": "EVENT_ENTITY_DELETE",
+                "createEvent": "EVENT_ENTITY_INSERT",
+                "modalPosition": "centre",
+                "sizeColumnsToFit": true,
+                "enableSearchBar": false,
+                "reqrep": false,
+                "columns": [
+                  {
+                    "field": "ENTITY_NAME",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "ENTITY_NAME",
+                      "displayName": "Entity Name",
+                      "alias": null,
+                      "id": "ENTITY_NAMEID"
+                    }
+                  }
+                ],
+                "createFormUiSchema": {
+                  "type": "VerticalLayout",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "label": "Entity Name",
+                      "scope": "#/properties/ENTITY_NAME",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "ENTITY_NAME",
+                        "id": "ENTITY_NAMEID"
+                      }
+                    }
+                  ]
+                },
+                "updateFormUiSchema": {
+                  "type": "VerticalLayout",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "label": "Entity Name",
+                      "scope": "#/properties/ENTITY_NAME",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "ENTITY_NAME",
+                        "id": "ENTITY_NAMEID"
+                      }
+                    }
+                  ]
+                },
+                "meta": {
+                  "inactiveGridConfig": [],
+                  "inactiveFormConfig": [],
+                  "configAttrNames": [
+                    {
+                      "name": "ENTITY_NAME",
+                      "alias": null
+                    }
+                  ]
+                }
+              },
+              "meta": {}
+            },
+            {
+              "title": "User Entities",
+              "type": "entity-manager",
+              "config": {
+                "resourceName": "ALL_USER_ENTITY_ACCESSS",
+                "permissions": null,
+                "updateEvent": "EVENT_USER_ENTITY_ACCESS_MODIFY",
+                "deleteEvent": "EVENT_USER_ENTITY_ACCESS_DELETE",
+                "createEvent": "EVENT_USER_ENTITY_ACCESS_INSERT",
+                "modalPosition": "centre",
+                "sizeColumnsToFit": true,
+                "enableSearchBar": false,
+                "reqrep": false,
+                "columns": [
+                  {
+                    "field": "ENTITY_NAME",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "ENTITY_NAME",
+                      "displayName": "Entity Name",
+                      "alias": null,
+                      "id": "ENTITY_NAMEID"
+                    }
+                  },
+                  {
+                    "field": "USER",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "USER",
+                      "displayName": "User",
+                      "alias": null,
+                      "id": "USERID"
+                    }
+                  }
+                ],
+                "createFormUiSchema": {
+                  "type": "VerticalLayout",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "label": "Entity Name",
+                      "scope": "#/properties/ENTITY_NAME",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "ENTITY_NAME",
+                        "id": "ENTITY_NAMEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "User",
+                      "scope": "#/properties/USER",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "USER",
+                        "id": "USERID"
+                      }
+                    }
+                  ]
+                },
+                "updateFormUiSchema": {
+                  "type": "VerticalLayout",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "label": "Entity Name",
+                      "scope": "#/properties/ENTITY_NAME",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "ENTITY_NAME",
+                        "id": "ENTITY_NAMEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "User",
+                      "scope": "#/properties/USER",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "USER",
+                        "id": "USERID"
+                      }
+                    }
+                  ]
+                },
+                "meta": {
+                  "inactiveGridConfig": [],
+                  "inactiveFormConfig": [],
+                  "configAttrNames": [
+                    {
+                      "name": "ENTITY_NAME",
+                      "alias": null
+                    },
+                    {
+                      "name": "USER",
+                      "alias": null
+                    }
+                  ]
+                }
+              },
+              "meta": {}
+            }
+          ]
+        }
+      ],
+      "framework": "web components"
+    },
+    "views": [],
+    "PBCs": [],
+    "csv": [
+      {
+        "name": "ENTITY",
+        "fields": [
+          "ENTITY_NAME"
+        ]
+      },
+      {
+        "name": "USER_ENTITY_ACCESS",
+        "fields": [
+          "ENTITY_NAME",
+          "USER"
+        ]
+      },
+      {
+        "name": "TRADE",
+        "fields": [
+          "VERSION",
+          "ENTITY_NAME",
+          "SIDE",
+          "RATE",
+          "NOTIONAL",
+          "SETTLEMENT_DATE",
+          "SOURCE_CURRENCY",
+          "TARGET_CURRENCY",
+          "CUSTOMER_ID",
+          "CUSTOMER_NAME"
+        ]
+      },
+      {
+        "name": "RIGHT",
+        "fields": [
+          "CODE",
+          "DESCRIPTION"
+        ],
+        "data": [
+          [
+            "TradeViewRestricted",
+            "Trade view restricted"
+          ],
+          [
+            "TradeUpdate",
+            "Trade update"
+          ]
+        ]
+      },
+      {
+        "name": "PROFILE",
+        "fields": [
+          "NAME",
+          "DESCRIPTION",
+          "STATUS"
+        ],
+        "data": [
+          [
+            "permissions_ADMIN",
+            "permissions admin",
+            "ENABLED"
+          ]
+        ]
+      },
+      {
+        "name": "PROFILE_RIGHT",
+        "fields": [
+          "PROFILE_NAME",
+          "RIGHT_CODE"
+        ],
+        "data": [
+          [
+            "permissions_ADMIN",
+            "TradeViewRestricted"
+          ],
+          [
+            "permissions_ADMIN",
+            "TradeUpdate"
+          ]
+        ]
+      },
+      {
+        "name": "PROFILE_USER",
+        "data": [
+          [
+            "permissions_ADMIN",
+            "admin"
+          ]
+        ],
+        "mode": "append"
+      }
+    ],
+    "serverConfig": null,
+    "deliveryConfig": {
+      "method": "download",
+      "fileSuffix": "2024-07-25_152717"
+    },
+    "telemetry": {
+      "deviceId": "4bb83348-5799-4b39-b9d6-db44297d65fa",
+      "sessionId": "84d73860-4484-4a10-9232-4dca88b2c99b"
+    }
+  }
+}
