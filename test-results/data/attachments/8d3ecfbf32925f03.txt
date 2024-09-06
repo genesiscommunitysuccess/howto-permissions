@@ -1,0 +1,16 @@
+requestReply("RR_ALL_TRADES_3", TRADE) {
+    permissioning {
+      // AUTH-COMMENT
+      // The below will force people to have this RIGHT_CODE to access this request reply query
+      // N.B. this can be a list of RIGHT_CODE's
+      permissionCodes = listOf("TradeViewRestricted")
+      auth{
+        // AUTH-COMMENT
+        // The below will check RIGHT_CODE's to hide columns at run time, enabling column specific authorisation
+        hideFields { userName, rowData ->
+          if (!userHasRight(userName, "TradeViewFull")) listOf(CUSTOMER_NAME)
+          else emptyList()
+        }
+      }
+    }
+  }

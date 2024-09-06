@@ -1,0 +1,30 @@
+eventHandler<Trade>("TRADE_INSERT", transactional = true) {
+    // AUTH-COMMENT
+    // A user must have the RIGHT CODE "TradeUpdate" to call this event
+    // Without this call will be rejected
+    permissioning {
+      permissionCodes = listOf("TradeUpdate")
+      // AUTH-COMMENT
+      // A user must have authorisation for the country they are inserting a transaction against
+      // This is applying row level insert authorisation
+      auth(mapName = "COUNTRY_VISIBILITY") {
+        authKeyWithUserName {
+          key(data.countryName, userName)
+        }
+      }
+    }
+    onCommit { event ->
+      val details = event.details
+      // AUTH-COMMENT
+      // If a user cannot see the Customer Name column they should not be able to insert this value so set to blank
+      // Cannot think of a viable business use case for this, but showing the code for reference
+      if (!userHasRight(event.userName, "TradeViewFull")) {
+        details.customerName = ""
+      }
+      val insertedRow = entityDb.insert(details)
+      // return an ack response which contains a list of record IDs
+      ack(listOf(mapOf(
+        "TRADE_ID" to insertedRow.record.tradeId,
+      )))
+    }
+  }
