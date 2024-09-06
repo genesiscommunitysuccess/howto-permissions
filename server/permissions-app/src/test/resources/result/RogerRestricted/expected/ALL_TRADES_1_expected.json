@@ -1,0 +1,1 @@
+{"ERROR":[{"@type":"StandardError","CODE":"NOT_AUTHORISED","TEXT":"User RogerRestricted lacks sufficient permissions","STATUS_CODE":"403 Forbidden"}],"WARNING":[],"MESSAGE_TYPE":"LOGON_NACK","METADATA":{"IS_EMPTY":true,"ALL":{}}}
